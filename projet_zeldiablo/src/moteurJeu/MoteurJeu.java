@@ -16,8 +16,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-// copied from: https://gist.github.com/james-d/8327842
-// and modified to use canvas drawing instead of shapes
 
 public class MoteurJeu extends Application {
 
