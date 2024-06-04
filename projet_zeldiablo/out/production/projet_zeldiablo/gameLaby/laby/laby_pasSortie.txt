@@ -1,7 +1,7 @@
 14
 20
 XXXXXXXXXXXXXXXXXXXX
-XX..M....X........XX
+XX.......X........XX
 X........X.........X
 X........X...X.....X
 X..X.....X........XX
@@ -14,3 +14,4 @@ X........X.........X
 X........X.........X
 XX...............PXX
 XXXXXXXXXXXXXXXXXXXX
+
