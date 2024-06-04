@@ -2,7 +2,9 @@ package gameLaby.laby;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import moteurJeu.DessinJeu;
 import moteurJeu.Jeu;
 
@@ -51,6 +53,17 @@ public class LabyDessin implements DessinJeu {
             double monstrey = labyrinthe.getLabyrinthe().monstre.getY();
             gc.setFill(Color.rgb(127,0,255));
             gc.fillOval(monstrex * TAILLE, monstrey * TAILLE, TAILLE, TAILLE);
+        }
+
+        if (labyrinthe.getLabyrinthe().amulette != null) {
+            if (!labyrinthe.getLabyrinthe().pj.getAmulette()) {
+                double amulettex = labyrinthe.getLabyrinthe().amulette.getX();
+                double amulettey = labyrinthe.getLabyrinthe().amulette.getY();
+                gc.setFill(Color.rgb(255, 190, 0));
+                Image img = new Image("C:\\Users\\jeanm\\Pictures\\Screenshot_20240204-110849_Opera_GX_3_1 (1).jpg");
+                gc.setFill(new ImagePattern(img));
+                gc.fillOval(amulettex * TAILLE, amulettey * TAILLE, TAILLE, TAILLE);
+            }
         }
     }
 }

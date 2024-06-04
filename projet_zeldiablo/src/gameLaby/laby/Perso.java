@@ -5,7 +5,10 @@ package gameLaby.laby;
  * gere un personnage situe en x,y
  */
 public class Perso {
-
+    /**
+     * si le joueur a l'amulette pour sortir
+     */
+    private boolean amulette;
     /**
      * position du personnage
      */
@@ -20,6 +23,14 @@ public class Perso {
     public Perso(int dx, int dy) {
         this.x = dx;
         this.y = dy;
+    }
+
+    /**
+     * setter de l'amulette
+     * @param amulette a ou non l'amulette
+     */
+    public void setAmulette(boolean amulette) {
+        this.amulette = amulette;
     }
 
     /**
@@ -52,5 +63,12 @@ public class Perso {
     public int getY() {
         //getter
         return this.y;
+    }
+
+    /**
+     * @return si le joueur posséde l'amulette
+     */
+    public boolean getAmulette() {
+        return amulette;
     }
 }

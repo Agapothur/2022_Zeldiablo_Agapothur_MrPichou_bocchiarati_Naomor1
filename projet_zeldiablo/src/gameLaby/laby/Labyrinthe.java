@@ -20,6 +20,7 @@ Labyrinthe {
     public static final char MUR = 'X';
     public static final char PJ = 'P';
     public static final char MONSTRE = 'M';
+    public static final char AMULETTE = 'A';
     public static final char VIDE = '.';
 
     /**
@@ -38,6 +39,8 @@ Labyrinthe {
      */
     public Perso pj;
     public Monstre monstre;
+
+    public Amulette amulette;
 
     /**
      * les murs du labyrinthe
@@ -101,6 +104,7 @@ Labyrinthe {
         this.murs = new boolean[nbColonnes][nbLignes];
         this.pj = null;
         this.monstre = null;
+        this.amulette = null;
         this.random = new Random();
 
         // lecture des cases
@@ -133,6 +137,12 @@ Labyrinthe {
                         this.murs[colonne][numeroLigne] = false;
                         // ajoute Monstre
                         this.monstre = new Monstre(colonne, numeroLigne);
+                        break;
+                    case AMULETTE:
+                        // pas de mur
+                        this.murs[colonne][numeroLigne] = false;
+                        // ajoute amulette
+                        this.amulette = new Amulette(colonne, numeroLigne);
                         break;
                     default:
                         throw new Error("caractere inconnu " + c);
@@ -167,6 +177,13 @@ Labyrinthe {
             // on met a jour personnage
             this.pj.x = suivante[0];
             this.pj.y = suivante[1];
+        }
+        //si c'est l'amulette, on la prend
+        if (this.amulette.x == suivante[0] && this.amulette.y == suivante[1]){
+            this.pj.setAmulette(true);
+            //envois de l'amulette dans les abisses
+            this.amulette.x = 999;
+            this.amulette.y = 999;
         }
         String actions = ACTIONS[random.nextInt(ACTIONS.length)];
         deplacerMonstre(actions);
