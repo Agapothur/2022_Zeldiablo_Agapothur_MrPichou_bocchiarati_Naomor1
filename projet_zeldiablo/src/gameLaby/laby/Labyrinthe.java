@@ -49,6 +49,8 @@ Labyrinthe {
 
     private Random random;
 
+    private boolean amulettepresente;
+
     /**
      * retourne la case suivante selon une actions
      *
@@ -143,6 +145,7 @@ Labyrinthe {
                         this.murs[colonne][numeroLigne] = false;
                         // ajoute amulette
                         this.amulette = new Amulette(colonne, numeroLigne);
+                        this.amulettepresente = true;
                         break;
                     default:
                         throw new Error("caractere inconnu " + c);
@@ -179,11 +182,13 @@ Labyrinthe {
             this.pj.y = suivante[1];
         }
         //si c'est l'amulette, on la prend
-        if (this.amulette.x == suivante[0] && this.amulette.y == suivante[1]){
-            this.pj.setAmulette(true);
-            //envois de l'amulette dans les abisses
-            this.amulette.x = 999;
-            this.amulette.y = 999;
+        if(this.amulettepresente) {
+            if (this.amulette.x == suivante[0] && this.amulette.y == suivante[1]) {
+                this.pj.setAmulette(true);
+                //envois de l'amulette dans les abisses
+                this.amulette.x = 999;
+                this.amulette.y = 999;
+            }
         }
         String actions = ACTIONS[random.nextInt(ACTIONS.length)];
         deplacerMonstre(actions);
