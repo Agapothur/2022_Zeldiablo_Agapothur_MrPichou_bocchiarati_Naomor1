@@ -7,7 +7,7 @@ public class MainLaby {
 
     public static void main(String[] args) {
 
-        MoteurJeu.setFPS(7);
+        MoteurJeu.setFPS(15);
 
         try {
             String[] noms = new String[3];
