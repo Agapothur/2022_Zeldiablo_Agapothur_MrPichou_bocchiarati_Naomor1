@@ -6,12 +6,14 @@ public class MainLaby {
 
     public static void main(String[] args) {
 
-        MoteurJeu.setFPS(15);
+        MoteurJeu.setFPS(7);
 
         try {
-
-            String numLaby = "00";
-            LabyJeu jeu = new LabyJeu("projet_zeldiablo/labySimple/e" + numLaby + ".txt");
+            String[] noms = new String[3];
+            for(int i = 0; i<noms.length; i++){
+                noms[i] = "projet_zeldiablo/labySimple/e0" + i + ".txt";
+            }
+            LabyJeu jeu = new LabyJeu(noms);
             MoteurJeu.setTaille( jeu.getLabyrinthe().getLength()*LabyDessin.TAILLE,  jeu.getLabyrinthe().getLengthY()*LabyDessin.TAILLE);
             LabyDessin dessin = new LabyDessin();
             MoteurJeu.launch(jeu, dessin);
