@@ -10,7 +10,7 @@ public class MainLaby {
 
         try {
 
-            String numLaby = "01";
+            String numLaby = "00";
             LabyJeu jeu = new LabyJeu("projet_zeldiablo/labySimple/e" + numLaby + ".txt");
             MoteurJeu.setTaille( jeu.getLabyrinthe().getLength()*LabyDessin.TAILLE,  jeu.getLabyrinthe().getLengthY()*LabyDessin.TAILLE);
             LabyDessin dessin = new LabyDessin();
