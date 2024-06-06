@@ -41,6 +41,13 @@ public class LabyDessin implements DessinJeu {
             }
         }
 
+        //sortie
+        if (labyrinthe.getLabyrinthe().sortie != null) {
+            double sortiex = labyrinthe.getLabyrinthe().sortie.getX();
+            double sortiey = labyrinthe.getLabyrinthe().sortie.getY();
+            gc.setFill(Color.rgb(86,72,23));
+            gc.fillOval(sortiex * TAILLE, sortiey * TAILLE, TAILLE, TAILLE);
+        }
         // perso
         double persox = labyrinthe.getLabyrinthe().pj.getX();
         double persoy = labyrinthe.getLabyrinthe().pj.getY();
@@ -54,7 +61,7 @@ public class LabyDessin implements DessinJeu {
             gc.setFill(Color.rgb(127,0,255));
             gc.fillOval(monstrex * TAILLE, monstrey * TAILLE, TAILLE, TAILLE);
         }
-
+        //amulette
         if (labyrinthe.getLabyrinthe().amulette != null) {
             if (!labyrinthe.getLabyrinthe().pj.getAmulette()) {
                 double amulettex = labyrinthe.getLabyrinthe().amulette.getX();
@@ -65,5 +72,6 @@ public class LabyDessin implements DessinJeu {
                 gc.fillOval(amulettex * TAILLE, amulettey * TAILLE, TAILLE, TAILLE);
             }
         }
+
     }
 }

@@ -1,0 +1,54 @@
+6.2 Mise en place de l'amulette
+Au lancement du jeu, une amulette est placée sur une case vide du labyrinthe. Le
+placement de l'amulette est toujours le même et dépend du niveau.
+Critères de validation
+• L'amulette ne peut être placée que sur une case vide.
+• Les monstres et le héros peuvent se situer sur la case de l'amulette.
+• L'amulette est achée dans le jeu sous la forme d'un cercle jaune sur la case vide
+où elle se trouve.
+
+6.3 Acquisition de l'amulette
+Dés que le joueur demande à déplacer le héros sur l'amulette, le héros se déplace et
+prend l'amulette.
+Critères de validation
+• L'amulette n'est plus sur le plateau (et n'est plus achée).
+• Le Héros possède l'amulette.
+• Un monstre ne récupère pas l'amulette.
+
+1.8 Gestion d'un labyrinthe multi-étages
+Le labyrinthe est constitué de plusieurs étages. Chaque étage correspond à un niveau
+particulier. Des escaliers permettent de passer d'un étage à un autre.
+Critères de validation
+• Les escaliers sont des cases traversables par le héros et les monstres.
+• Lorsque le héros se trouve sur un escalier, il peut l'activer et il change alors de
+niveau.
+• Les monstres du niveau où le héros se trouvait avant l'escalier n'apparaissent pas
+dans l'étage supérieur/inférieur. Ils restent à leur position et conservent leur points
+de vie.
+• De nouveaux monstres peuvent être présents à l'étage supérieur en fonction du
+descriptif du niveau.
+• Le Héros arrive aux mêmes coordonnées dans l'étage supérieur/inférieur après
+avoir emprunté les escaliers.
+• Les escaliers peuvent être de deux types : un escalier qui monte ou un escalier qui
+descend.
+• Les escaliers sont empruntables dans les deux sens : un escalier qui monte vers un
+étage possède un escalier qui descend à la même position dans l'étage supérieur
+(et inversement).
+
+5.1 Attaque des monstres
+Lorsqu'un monstre doit agir, si le monstre se trouve à coté du héros, alors il ne se
+déplace pas mais il attaque celui-ci.
+Critères de validation
+• Lorsque le monstre est à côté du joueur, il attaque et ne se déplace pas. Par défaut,
+le Héros perd 1 point de vie.
+• Lorsque le monstre est loin du joueur, il n'attaque pas mais se déplace.
+
+6.1 Fin du jeu : mort du héros
+Lorsque le héros n'a plus de points de vie, le jeu s'arrête et la partie est perdue.
+Critères de validation
+• Le héros par défaut dispose de 5 points de vie.
+• Chaque monstre fait 1 point de dégât lorsque le héros se fait attaquer.
+• Quand le héros meurt, un message de n est aché sur la console et le jeu s'arrête.
+
+
+

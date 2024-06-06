@@ -22,6 +22,7 @@ Labyrinthe {
     public static final char MONSTRE = 'M';
     public static final char AMULETTE = 'A';
     public static final char VIDE = '.';
+    public static final char SORTIE = 'S';
 
     /**
      * constantes actions possibles
@@ -42,6 +43,8 @@ Labyrinthe {
 
     public Amulette amulette;
 
+    public Sortie sortie;
+
     /**
      * les murs du labyrinthe
      */
@@ -50,7 +53,7 @@ Labyrinthe {
     private Random random;
 
     private boolean amulettepresente;
-
+    private boolean sortiepresente;
     /**
      * retourne la case suivante selon une actions
      *
@@ -108,6 +111,7 @@ Labyrinthe {
         this.monstre = null;
         this.amulette = null;
         this.random = new Random();
+        this.sortie = null;
 
         // lecture des cases
         String ligne = bfRead.readLine();
@@ -146,6 +150,13 @@ Labyrinthe {
                         // ajoute amulette
                         this.amulette = new Amulette(colonne, numeroLigne);
                         this.amulettepresente = true;
+                        break;
+                    case SORTIE:
+                        // pas de mur
+                        this.murs[colonne][numeroLigne] = false;
+                        // ajoute amulette
+                        this.sortie = new Sortie(colonne, numeroLigne);
+                        this.sortiepresente = true;
                         break;
                     default:
                         throw new Error("caractere inconnu " + c);
@@ -189,6 +200,15 @@ Labyrinthe {
                 this.amulette.x = 999;
                 this.amulette.y = 999;
             }
+
+        }
+        if(this.sortiepresente) {
+            if (this.sortie.x == suivante[0] && this.sortie.y == suivante[1]) {
+                if (this.pj.getAmulette()) {
+                    System.out.println("WIIIINNNNNNNNN");
+                    System.exit(0);
+                }
+            }
         }
         String actions = ACTIONS[random.nextInt(ACTIONS.length)];
         deplacerMonstre(actions);
@@ -212,6 +232,7 @@ Labyrinthe {
                     System.out.println(this.pj.getVie());
                     attaque = true;
                     if(this.pj.getVie()==0){
+                        System.out.println("Bro's dead, RIP Bozo");
                         System.exit(1);
                     }
                 }

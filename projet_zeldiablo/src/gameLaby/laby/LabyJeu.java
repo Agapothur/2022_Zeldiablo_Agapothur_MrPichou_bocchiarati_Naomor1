@@ -67,22 +67,30 @@ public class LabyJeu implements Jeu {
     public void setLabyrinthe() throws IOException {
         if((noms[current] == noms[0])&& labyrinthes[current].pj.getX() == 15 && labyrinthes[current].pj.getY() == 13){
             labyrinthes[current].pj.y -= 1;
+            boolean a = labyrinthes[current].pj.getAmulette();
             current = 1;
+            labyrinthes[current].pj.setAmulette(a);
         }
 
         if(noms[current] == noms[1] && labyrinthes[current].pj.getX() == 15  && labyrinthes[current].pj.getY() == 13){
             labyrinthes[current].pj.y -= 1;
+            boolean a = labyrinthes[current].pj.getAmulette();
             current = 0;
+            labyrinthes[current].pj.setAmulette(a);
         }
 
         if(noms[current] == noms[1] && labyrinthes[current].pj.getX() == 0  && labyrinthes[current].pj.getY() == 2){
             labyrinthes[current].pj.x += 1;
+            boolean a = labyrinthes[current].pj.getAmulette();
             current = 2;
+            labyrinthes[current].pj.setAmulette(a);
         }
 
         if(noms[current] == noms[2] && labyrinthes[current].pj.getX() == 0  && labyrinthes[current].pj.getY() == 2){
             labyrinthes[current].pj.x += 1;
+            boolean a = labyrinthes[current].pj.getAmulette();
             current = 1;
+            labyrinthes[current].pj.setAmulette(a);
         }
     }
 
