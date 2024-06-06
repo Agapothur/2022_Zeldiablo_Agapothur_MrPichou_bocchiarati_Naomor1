@@ -53,4 +53,5 @@ public class LabyJeu implements Jeu {
     public Labyrinthe getLabyrinthe() {
         return this.labyrinthe;
     }
+
 }
