@@ -60,8 +60,8 @@ public class LabyDessin implements DessinJeu {
                 double amulettex = labyrinthe.getLabyrinthe().amulette.getX();
                 double amulettey = labyrinthe.getLabyrinthe().amulette.getY();
                 gc.setFill(Color.rgb(255, 190, 0));
-                Image img = new Image("C:\\Users\\jeanm\\Pictures\\Screenshot_20240204-110849_Opera_GX_3_1 (1).jpg");
-                gc.setFill(new ImagePattern(img));
+                //Image img = new Image("projet_zeldiablo/image/bob.jpg");
+                //gc.setFill(new ImagePattern(img));
                 gc.fillOval(amulettex * TAILLE, amulettey * TAILLE, TAILLE, TAILLE);
             }
         }

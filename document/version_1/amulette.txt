@@ -1,0 +1,13 @@
+ajoute d'une classe qui implemente entite
+
+ajout d'un case dans labyrinthe
+
+ajout d'un variable dans labyrinthea
+
+ajout d'une variable static dans labyrinthe
+
+ajout d'un object graphic dans labydessin
+
+ajout d'un attribut amulette dans perso
+
+si le perso va sur l'amulette, son attribut va à true et l'amulette disparer
