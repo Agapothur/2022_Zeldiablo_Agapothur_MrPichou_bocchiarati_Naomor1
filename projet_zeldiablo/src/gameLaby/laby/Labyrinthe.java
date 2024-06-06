@@ -201,15 +201,28 @@ Labyrinthe {
      * @param action une des actions possibles
      */
     public void deplacerMonstre(String action) {
-
+        boolean attaque = false;
         int[] courante = {this.monstre.x, this.monstre.y};
-
+        int cooldown = 0;
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
-
-        if (!this.murs[suivante[0]][suivante[1]] && (this.pj.x != suivante[0] || this.pj.y != suivante[1])) {
+        for (int i =-1; i<2;i++){
+            for (int j =-1; j<2;j++){
+                if(this.monstre.x-j==this.pj.x && this.monstre.y-i==this.pj.y){
+                    this.pj.subirdegat(1);
+                    System.out.println(this.pj.getVie());
+                    attaque = true;
+                }
+            }
+        }
+        if (!this.murs[suivante[0]][suivante[1]] && (this.pj.x != suivante[0] || this.pj.y != suivante[1]) && !attaque) {
             this.monstre.x = suivante[0];
             this.monstre.y = suivante[1];
+        }else if(cooldown==0){
+            cooldown++;
+        }else{
+            attaque = false;
+            cooldown=0;
         }
     }
 

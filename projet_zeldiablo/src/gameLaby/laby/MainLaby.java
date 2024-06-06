@@ -14,6 +14,7 @@ public class MainLaby {
                 noms[i] = "projet_zeldiablo/labySimple/e0" + i + ".txt";
             }
             LabyJeu jeu = new LabyJeu(noms);
+
             MoteurJeu.setTaille( jeu.getLabyrinthe().getLength()*LabyDessin.TAILLE,  jeu.getLabyrinthe().getLengthY()*LabyDessin.TAILLE);
             LabyDessin dessin = new LabyDessin();
             MoteurJeu.launch(jeu, dessin);

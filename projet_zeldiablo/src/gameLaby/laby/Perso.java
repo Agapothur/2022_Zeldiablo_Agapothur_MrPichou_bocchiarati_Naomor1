@@ -14,6 +14,8 @@ public class Perso {
      */
     int x, y;
 
+    private int vie;
+
     /**
      * constructeur
      *
@@ -23,6 +25,7 @@ public class Perso {
     public Perso(int dx, int dy) {
         this.x = dx;
         this.y = dy;
+        this.vie = 10;
     }
 
     /**
@@ -31,6 +34,14 @@ public class Perso {
      */
     public void setAmulette(boolean amulette) {
         this.amulette = amulette;
+    }
+
+    /**
+     * methode subir dégats
+     * @param v vie à enlever
+     */
+    public void subirdegat(int v){
+        this.vie-=v;
     }
 
     /**
@@ -70,5 +81,9 @@ public class Perso {
      */
     public boolean getAmulette() {
         return amulette;
+    }
+
+    public int getVie(){
+        return this.vie;
     }
 }
