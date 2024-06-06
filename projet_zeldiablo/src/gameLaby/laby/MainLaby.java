@@ -1,8 +1,7 @@
 package gameLaby.laby;
 
 import moteurJeu.MoteurJeu;
-// Ittération 1 : Amulette / Multi-etage
-// Ittération 2 : 
+
 public class MainLaby {
 
     public static void main(String[] args) {
