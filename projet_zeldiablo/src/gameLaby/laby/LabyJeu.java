@@ -59,8 +59,10 @@ public class LabyJeu implements Jeu {
             labyrinthes[current].monstreEstSurCase(directions[1], labyrinthes[current].pj.getForce());
         }
         setLabyrinthe();
-        System.out.println("PV Monstre : " + labyrinthes[current].monstre.getPv());
 
+        if(labyrinthes[current].monstre.getPv() == 0){
+            labyrinthes[current].nePlusAfficherMonstre();
+        }
 
     }
 

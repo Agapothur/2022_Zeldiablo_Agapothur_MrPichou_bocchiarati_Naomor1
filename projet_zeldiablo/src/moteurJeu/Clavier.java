@@ -76,7 +76,7 @@ public class Clavier {
 
             // si touche espace
             case SPACE:
-                this.space = true;
+                this.space = false;
                 break;
 
         }
