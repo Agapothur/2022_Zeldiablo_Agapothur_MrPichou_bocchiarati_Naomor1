@@ -15,6 +15,8 @@ public class LabyJeu implements Jeu {
     int current;
     String last;
 
+    Save saves;
+
     /**
      * Constructeur de la classe LabyJeu.
      *
@@ -28,6 +30,7 @@ public class LabyJeu implements Jeu {
             this.labyrinthes[i] = new Labyrinthe(this.noms[i]);
         }
         this.current = 0;
+        this.saves = new Save();
     }
 
     @Override
@@ -83,33 +86,38 @@ public class LabyJeu implements Jeu {
         return this.labyrinthes[current];
     }
 
+    public void save(){
+
+    }
+
     public void setLabyrinthe() throws IOException {
         if((noms[current] == noms[0])&& labyrinthes[current].pj.getX() == 15 && labyrinthes[current].pj.getY() == 13){
             labyrinthes[current].pj.y -= 1;
-            boolean a = labyrinthes[current].pj.getAmulette();
+            saves.save(labyrinthes[current]);
             current = 1;
-            labyrinthes[current].pj.setAmulette(a);
+            saves.restaure(labyrinthes[current]);
         }
 
         if(noms[current] == noms[1] && labyrinthes[current].pj.getX() == 15  && labyrinthes[current].pj.getY() == 13){
             labyrinthes[current].pj.y -= 1;
-            boolean a = labyrinthes[current].pj.getAmulette();
+            saves.save(labyrinthes[current]);
             current = 0;
-            labyrinthes[current].pj.setAmulette(a);
+            saves.restaure(labyrinthes[current]);
+
         }
 
         if(noms[current] == noms[1] && labyrinthes[current].pj.getX() == 0  && labyrinthes[current].pj.getY() == 2){
             labyrinthes[current].pj.x += 1;
-            boolean a = labyrinthes[current].pj.getAmulette();
+            saves.save(labyrinthes[current]);
             current = 2;
-            labyrinthes[current].pj.setAmulette(a);
+            saves.restaure(labyrinthes[current]);
         }
 
         if(noms[current] == noms[2] && labyrinthes[current].pj.getX() == 0  && labyrinthes[current].pj.getY() == 2){
             labyrinthes[current].pj.x += 1;
-            boolean a = labyrinthes[current].pj.getAmulette();
+            saves.save(labyrinthes[current]);
             current = 1;
-            labyrinthes[current].pj.setAmulette(a);
+            saves.restaure(labyrinthes[current]);
         }
     }
 
