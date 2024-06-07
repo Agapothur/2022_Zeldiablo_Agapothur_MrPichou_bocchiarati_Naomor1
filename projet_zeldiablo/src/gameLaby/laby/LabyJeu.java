@@ -69,6 +69,11 @@ public class LabyJeu implements Jeu {
             labyrinthes[current].nePlusAfficherMonstre();
         }
 
+        if(Arrays.equals(labyrinthes[current].armes[0].getPos(), labyrinthes[current].pj.getPos()))
+            labyrinthes[current].pj.setArme(labyrinthes[current].armes[0]);
+
+        System.out.println(labyrinthes[current].pj.possedeArme());
+
     }
 
     @Override

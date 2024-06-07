@@ -21,7 +21,8 @@ Labyrinthe {
      * Constantes char
      */
     public static final char MUR = 'X', PJ = 'P', MONSTRE = 'M', AMULETTE = 'A', VIDE = '.', SORTIE = 'S',
-            ECHELLE1 = '1', ECHELLE2 = '2', ECHELLE3 = '3', ECHELLE4 = '4';
+            ECHELLE1 = '1', ECHELLE2 = '2', ECHELLE3 = '3', ECHELLE4 = '4',
+            ARME = 'W', BOUCLIER = 'B';
 
     /**
      * constantes actions possibles
@@ -40,6 +41,8 @@ Labyrinthe {
     public Amulette amulette;
     public Sortie sortie;
     public Echelle[] echelles;
+    public Arme[] armes;
+    public Bouclier[] boucliers;
 
     /**
      * les murs du labyrinthe
@@ -106,7 +109,11 @@ Labyrinthe {
         this.amulette = null;
         this.random = new Random();
         this.sortie = null;
-        this.echelles = new Echelle[]{null, null, null, null};
+        this.echelles = new Echelle[4];
+        this.armes =  new Arme[5];
+        this.boucliers = new Bouclier[5];
+        int numBouclier = 0;
+        int numArme = 0;
 
         // lecture des cases
         String ligne = bfRead.readLine();
@@ -168,6 +175,16 @@ Labyrinthe {
                     case ECHELLE4 :
                         this.murs[colonne][numeroLigne] = false;
                         this.echelles[3] = new Echelle(colonne, numeroLigne);
+                        break;
+                    case ARME :
+                        this.murs[colonne][numeroLigne]=false;
+                        this.armes[numArme] = new Arme(colonne, numeroLigne);
+                        numArme+=1;
+
+                    case BOUCLIER:
+                        this.murs[colonne][numeroLigne]=false;
+                        this.boucliers[numBouclier] = new Bouclier(colonne, numeroLigne);
+                        numBouclier+=1;
                         break;
                     default:
                         throw new Error("caractere inconnu " + c);

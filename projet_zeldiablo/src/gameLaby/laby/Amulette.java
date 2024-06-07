@@ -3,7 +3,7 @@ package gameLaby.laby;
 /**
  * Classe representant le monstre dans le labyrinthe
  */
-public class Amulette extends Entite {
+public class Amulette extends Items {
 
     /**
      * Constructeur du monstre

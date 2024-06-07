@@ -16,6 +16,8 @@ public class Perso {
      */
     int x, y;
 
+    private Arme arme;
+
     private int vie;
     private int force;
 
@@ -101,7 +103,14 @@ public class Perso {
     }
 
     public int getForce() {
+        if(possedeArme()){
+            return arme.boostDegats(force);
+        }
         return force;
+    }
+
+    public boolean possedeArme(){
+        return arme != null;
     }
 
     public int[][] attaqueDirectionelle(String direction) {
@@ -126,5 +135,9 @@ public class Perso {
 
     public int[] getPos(){
         return new int[]{x,y};
+    }
+
+    public void setArme(Arme arme) {
+        this.arme = arme;
     }
 }
