@@ -19,6 +19,7 @@ public class Perso {
     private int vie;
     private int force;
 
+    private boolean attaque;
     public Color couleur = Color.RED;
     /**
      * constructeur
@@ -126,5 +127,13 @@ public class Perso {
 
     public int[] getPos(){
         return new int[]{x,y};
+    }
+
+    public boolean getIsAttaque(){
+        return this.attaque;
+    }
+
+    public void setAttaque(boolean attaque) {
+        this.attaque = attaque;
     }
 }

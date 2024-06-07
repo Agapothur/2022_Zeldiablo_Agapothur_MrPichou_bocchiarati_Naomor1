@@ -18,7 +18,7 @@ import java.util.Random;
 
 public class LabyDessin implements DessinJeu {
 
-    public static final int TAILLE = 70;
+    public static final int TAILLE = 50;
 
     public Canvas c;
     private boolean first = true;
@@ -122,7 +122,7 @@ public class LabyDessin implements DessinJeu {
             }
         }
 
-        gc.fillOval(persox * TAILLE, persoy * TAILLE, TAILLE, TAILLE);
+        gc.fillRect(persox * TAILLE, persoy * TAILLE, TAILLE, TAILLE);
 
         // monstre
         if (labyrinthe.getLabyrinthe().monstre != null) {
@@ -147,7 +147,7 @@ public class LabyDessin implements DessinJeu {
                 }
             }
 
-            gc.fillOval(monstrex * TAILLE, monstrey * TAILLE, TAILLE, TAILLE);
+            gc.fillRect(monstrex * TAILLE, monstrey * TAILLE, TAILLE, TAILLE);
         }
         //amulette
         if (labyrinthe.getLabyrinthe().amulette != null) {
