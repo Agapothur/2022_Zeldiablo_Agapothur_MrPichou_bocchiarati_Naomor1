@@ -14,7 +14,7 @@ public class LabyJeu implements Jeu {
     private Labyrinthe[] labyrinthes;
     private String[] noms;
     int current;
-    String last;
+    public String last;
 
     Save saves;
 
@@ -68,12 +68,12 @@ public class LabyJeu implements Jeu {
         if(labyrinthes[current].monstre.getPv() == 0){
             labyrinthes[current].nePlusAfficherMonstre();
         }
-
-        if(Arrays.equals(labyrinthes[current].armes[0].getPos(), labyrinthes[current].pj.getPos()))
-            labyrinthes[current].pj.setArme(labyrinthes[current].armes[0]);
-
-        System.out.println(labyrinthes[current].pj.possedeArme());
-
+        for(int i = 0; i<labyrinthes[current].armes.length; i++) {
+            if(labyrinthes[current].armes[i] != null) {
+                if (Arrays.equals(labyrinthes[current].armes[0].getPos(), labyrinthes[current].pj.getPos()))
+                    labyrinthes[current].pj.setArme(labyrinthes[current].armes[0]);
+            }
+        }
     }
 
     @Override

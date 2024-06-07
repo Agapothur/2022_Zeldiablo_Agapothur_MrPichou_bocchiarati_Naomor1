@@ -9,15 +9,22 @@ import javafx.scene.shape.Circle;
 import moteurJeu.DessinJeu;
 import moteurJeu.Jeu;
 
+import java.util.Random;
+
 /**
  * Classe LabyDessin
  */
+
+
 public class LabyDessin implements DessinJeu {
 
     public static final int TAILLE = 50;
 
     public Canvas c;
+    private boolean first = true;
+    private final ImagePattern[] ip2 = new ImagePattern[255];
 
+    private int nbframe = 0;
 
     /**
      *
@@ -31,9 +38,43 @@ public class LabyDessin implements DessinJeu {
 
         final GraphicsContext gc = canvas.getGraphicsContext2D();
 
+        //tout les sols
+
+
         // fond
-        gc.setFill(Color.WHITE);
-        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        if(first) {
+            ImagePattern[] ip = new ImagePattern[7];
+
+            for(int i = 0; i<7;i++){
+                ip[i] = new ImagePattern(new Image("image/floor_"+(i+1)+".png"));
+            }
+
+            for (int i = 0; i < 255; i++) {
+                ip2[i] = (ip[(int)(Math.random()*7)]);
+            }
+            this.first = false;
+        }
+        int u = 0;
+        for(int i =0;i<14;i++){
+            for(int y=0;y<20;y++){
+                gc.setFill(ip2[u]);
+                gc.fillRect(y*TAILLE,i*TAILLE, TAILLE, TAILLE);
+                u+= 1;
+                if (u == 254){
+                    u = 0;
+                }
+            }
+        }
+//        gc.setFill(ip[2]);
+//        gc.fillRect(0, 0, canvas.getWidth(),canvas.getHeight() );
+
+
+        if(nbframe == 3){
+            nbframe = 0;
+        }else nbframe++;
+
+
+
 
         // dessin Labyrinthe
         gc.setFill(Color.rgb(30, 30, 30));
@@ -41,7 +82,8 @@ public class LabyDessin implements DessinJeu {
         for (int j = 0; j < laby.getLength(); j++) {
             for (int i = 0; i < laby.getLengthY(); i++) {
                 if (laby.getMur(j, i)) {
-                    Image img = new Image("image/Biden2.png");
+
+                    Image img = new Image("image/wall_right.png");
                     gc.setFill(new ImagePattern(img));
                     gc.fillRect(j * TAILLE, i * TAILLE, TAILLE, TAILLE);
                 }
@@ -61,15 +103,54 @@ public class LabyDessin implements DessinJeu {
         // perso
         double persox = labyrinthe.getLabyrinthe().pj.getX();
         double persoy = labyrinthe.getLabyrinthe().pj.getY();
-        gc.setFill(labyrinthe.getLabyrinthe().pj.getCouleur());
-        gc.fillOval(persox * TAILLE, persoy * TAILLE, TAILLE, TAILLE);
+        switch (nbframe) {
+            case 0 -> {
+                Image img = new Image("image/knight_m_idle_anim_f0.png");
+                gc.setFill(new ImagePattern(img));
+            }
+            case 1 -> {
+                Image img = new Image("image/knight_m_idle_anim_f1.png");
+                gc.setFill(new ImagePattern(img));
+            }
+            case 2 -> {
+                Image img = new Image("image/knight_m_idle_anim_f2.png");
+                gc.setFill(new ImagePattern(img));
+            }
+            case 3 -> {
+                Image img = new Image("image/knight_m_idle_anim_f3.png");
+                gc.setFill(new ImagePattern(img));
+            }
+            default -> {
+                gc.setFill(labyrinthe.getLabyrinthe().pj.getCouleur());
+            }
+        }
+
+        gc.fillRect(persox * TAILLE, persoy * TAILLE, TAILLE, TAILLE);
 
         // monstre
         if (labyrinthe.getLabyrinthe().monstre != null) {
             double monstrex = labyrinthe.getLabyrinthe().monstre.getX();
             double monstrey = labyrinthe.getLabyrinthe().monstre.getY();
-            gc.setFill(labyrinthe.getLabyrinthe().monstre.getCouleur());
-            gc.fillOval(monstrex * TAILLE, monstrey * TAILLE, TAILLE, TAILLE);
+            switch (nbframe) {
+                case 0 -> {
+                    Image img = new Image("image/big_demon_idle_anim_f0.png");
+                    gc.setFill(new ImagePattern(img));
+                }
+                case 1 -> {
+                    Image img = new Image("image/big_demon_idle_anim_f1.png");
+                    gc.setFill(new ImagePattern(img));
+                }
+                case 2 -> {
+                    Image img = new Image("image/big_demon_idle_anim_f2.png");
+                    gc.setFill(new ImagePattern(img));
+                }
+                case 3 -> {
+                    Image img = new Image("image/big_demon_idle_anim_f3.png");
+                    gc.setFill(new ImagePattern(img));
+                }
+            }
+
+            gc.fillRect(monstrex * TAILLE, monstrey * TAILLE, TAILLE, TAILLE);
         }
         //amulette
         if (labyrinthe.getLabyrinthe().amulette != null) {

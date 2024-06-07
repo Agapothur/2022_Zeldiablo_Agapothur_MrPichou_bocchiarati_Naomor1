@@ -17,10 +17,12 @@ public class Perso {
     int x, y;
 
     private Arme arme;
+    private Bouclier bouclier;
 
     private int vie;
     private int force;
 
+    private boolean attaque;
     public Color couleur = Color.RED;
     /**
      * constructeur
@@ -114,18 +116,13 @@ public class Perso {
     }
 
     public int[][] attaqueDirectionelle(String direction) {
-        switch(direction){
-            case Labyrinthe.DROITE :
-                return new int[][]{{x+1, y}, {x+2, y}};
-            case Labyrinthe.GAUCHE:
-                return new int[][]{{x-1, y}, {x-2, y}};
-            case Labyrinthe.HAUT :
-                return new int[][]{{x, y-1}, {x, y-2}};
-            case Labyrinthe.BAS:
-                return new int[][]{{x, y+1}, {x, y+2}};
-            default:
-                return new int[][]{{0,0},{0,0}};
-        }
+        return switch (direction) {
+            case Labyrinthe.DROITE -> new int[][]{{x + 1, y}, {x + 2, y}};
+            case Labyrinthe.GAUCHE -> new int[][]{{x - 1, y}, {x - 2, y}};
+            case Labyrinthe.HAUT -> new int[][]{{x, y - 1}, {x, y - 2}};
+            case Labyrinthe.BAS -> new int[][]{{x, y + 1}, {x, y + 2}};
+            default -> new int[][]{{0, 0}, {0, 0}};
+        };
 
     }
 
@@ -139,5 +136,25 @@ public class Perso {
 
     public void setArme(Arme arme) {
         this.arme = arme;
+    }
+
+    public void setBouclier(Bouclier bouclier) {
+        this.bouclier = bouclier;
+    }
+
+    public boolean getIsAttaque(){
+        return this.attaque;
+    }
+
+    public void setAttaque(boolean attaque) {
+        this.attaque = attaque;
+    }
+
+    public Arme getArme() {
+        return arme;
+    }
+
+    public Bouclier getBouclier() {
+        return bouclier;
     }
 }
