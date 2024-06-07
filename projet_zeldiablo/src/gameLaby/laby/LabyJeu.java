@@ -5,6 +5,7 @@ import moteurJeu.Clavier;
 import moteurJeu.Jeu;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Classe qui permet de faire fonctionner le jeu dans le labyrinthe
@@ -87,12 +88,8 @@ public class LabyJeu implements Jeu {
         return this.labyrinthes[current];
     }
 
-    public void save(){
-
-    }
-
     public void setLabyrinthe() throws IOException {
-        if((noms[current] == noms[0])&& labyrinthes[current].pj.getX() == 15 && labyrinthes[current].pj.getY() == 13){
+        if((noms[current] == noms[0])&& Arrays.equals(labyrinthes[current].pj.getPos(), labyrinthes[current].echelles[0].getPos())){
             labyrinthes[current].pj.y -= 1;
             saves.save(labyrinthes[current]);
             current = 1;
@@ -118,6 +115,20 @@ public class LabyJeu implements Jeu {
             labyrinthes[current].pj.x += 1;
             saves.save(labyrinthes[current]);
             current = 1;
+            saves.restaure(labyrinthes[current]);
+        }
+
+        if(noms[current] == noms[2] && labyrinthes[current].pj.getX() == 19  && labyrinthes[current].pj.getY() == 2){
+            labyrinthes[current].pj.x -= 1;
+            saves.save(labyrinthes[current]);
+            current = 3;
+            saves.restaure(labyrinthes[current]);
+        }
+
+        if(noms[current] == noms[3] && labyrinthes[current].pj.getX() == 0  && labyrinthes[current].pj.getY() == 2){
+            labyrinthes[current].pj.x += 1;
+            saves.save(labyrinthes[current]);
+            current = 2;
             saves.restaure(labyrinthes[current]);
         }
     }
