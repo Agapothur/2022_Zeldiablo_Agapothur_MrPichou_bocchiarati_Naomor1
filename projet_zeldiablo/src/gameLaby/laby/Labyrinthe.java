@@ -35,6 +35,7 @@ Labyrinthe {
     // Ajoutez les constantes pour les directions possibles
     public static final String[] ACTIONS = {HAUT, BAS, GAUCHE, DROITE};
 
+
     /**
      * attributs du personnage et du monstre
      */
@@ -210,8 +211,9 @@ Labyrinthe {
                 }
             }
         }
-        String actions = ACTIONS[random.nextInt(ACTIONS.length)];
-        deplacerMonstreAleatoire(actions);
+//        String actions = ACTIONS[random.nextInt(ACTIONS.length)];
+//        deplacerMonstreAleatoire(actions);
+        deplacerMonstreAttire();
     }
 
     /**
@@ -223,6 +225,54 @@ Labyrinthe {
     public void deplacerMonstreAleatoire(String action) {
         boolean attaque = false;
         int[] courante = {this.monstre.x, this.monstre.y};
+        int[] suivante = getSuivant(courante[0], courante[1], action);
+
+        for (int i =-1; i<2;i++){
+            for (int j =-1; j<2;j++){
+                if(this.monstre.x-j==this.pj.x && this.monstre.y-i==this.pj.y){
+                    this.pj.subirdegat(1);
+                    System.out.println(this.pj.getVie());
+                    attaque = true;
+                    if(this.pj.getVie()==0){
+                        System.out.println("Bro's dead, RIP Bozo");
+                        System.exit(1);
+                    }
+                }
+            }
+        }
+        if (!this.murs[suivante[0]][suivante[1]] && (this.pj.x != suivante[0] || this.pj.y != suivante[1]) && !attaque) {
+            this.monstre.x = suivante[0];
+            this.monstre.y = suivante[1];
+        }
+    }
+
+    public void deplacerMonstreAttire() {
+        boolean attaque = false;
+        int[] courante = {this.monstre.x, this.monstre.y};
+        String action = "";
+        if (courante[0] < this.pj.x){
+            action = ACTIONS[3];
+        }
+        if (courante[0] > this.pj.x){
+            action = ACTIONS[2];
+        }
+        if (courante[1] < this.pj.y){
+            if (this.murs[courante[0]+1][courante[1]] && action == ACTIONS[3] || this.murs[courante[0]-1][courante[1]] && (action == ACTIONS[2])){
+                action = ACTIONS[1];
+            }
+            if (action == ""){
+                action = ACTIONS[1];
+            }
+        }
+        if (courante[1] > this.pj.y){
+            if (this.murs[courante[0]+1][courante[1]] && action == ACTIONS[3] || this.murs[courante[0]-1][courante[1]] && (action == ACTIONS[2])){
+                action = ACTIONS[0];
+            }
+            if (action == ""){
+                action = ACTIONS[0];
+            }
+        }
+
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
         for (int i =-1; i<2;i++){
