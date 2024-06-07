@@ -24,6 +24,8 @@ public class LabyDessin implements DessinJeu {
     private boolean first = true;
     private final ImagePattern[] ip2 = new ImagePattern[255];
 
+    private int nbframe = 0;
+
     /**
      *
      * @param jeu le jeu
@@ -64,7 +66,9 @@ public class LabyDessin implements DessinJeu {
 //        gc.fillRect(0, 0, canvas.getWidth(),canvas.getHeight() );
 
 
-
+        if(nbframe == 3){
+            nbframe = 0;
+        }else nbframe++;
 
 
 
