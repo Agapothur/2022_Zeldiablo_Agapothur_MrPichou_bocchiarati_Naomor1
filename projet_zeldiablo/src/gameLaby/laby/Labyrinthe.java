@@ -334,4 +334,10 @@ Labyrinthe {
     public boolean getMur(int x, int y) {
         return this.murs[x][y];
     }
+
+    public void monstreEstSurCase(int[] position, int degats) {
+        if(monstre.getX() == position[0] && monstre.getY() == position[1]){
+            monstre.subirDegats(degats);
+        }
+    }
 }

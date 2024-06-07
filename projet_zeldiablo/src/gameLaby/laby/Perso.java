@@ -15,6 +15,7 @@ public class Perso {
     int x, y;
 
     private int vie;
+    private int force;
 
     /**
      * constructeur
@@ -26,6 +27,7 @@ public class Perso {
         this.x = dx;
         this.y = dy;
         this.vie = 5;
+        this.force = 1;
     }
 
     /**
@@ -85,5 +87,24 @@ public class Perso {
 
     public int getVie(){
         return this.vie;
+    }
+
+    public int getForce() {
+        return force;
+    }
+
+    public int[][] attaqueDirectionelle(String direction) {
+        switch(direction){
+            case Labyrinthe.DROITE :
+                return new int[][]{{x+1, y}, {x+2, y}};
+            case Labyrinthe.GAUCHE:
+                return new int[][]{{x-1, y}, {x-2, y}};
+            case Labyrinthe.HAUT :
+                return new int[][]{{x, y-1}, {x, y-2}};
+            case Labyrinthe.BAS:
+                return new int[][]{{x, y+1}, {x, y+2}};
+            default:
+                return new int[][]{{0,0},{0,0}};
+        }
     }
 }
