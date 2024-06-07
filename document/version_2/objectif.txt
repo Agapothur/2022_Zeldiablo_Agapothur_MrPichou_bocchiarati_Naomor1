@@ -7,42 +7,6 @@ Critères de validation
 déplacement (distance de Manhattan sans prise en compte des murs).
 • Les monstres soumis aux obstacles peuvent se retrouver bloqués dans des cul-desac.
 
-2.4 Monstres au comportement intelligent
-A chaque fois que les monstres se déplacent, ils se rapprochent dans la direction du
-héros en prenant en compte la présence des murs.
-Critères de validation
-• Avant son déplacement, le monstre détermine le meilleur chemin pour atteindre
-le héros.
-• Le monstre prend en compte les obstacles qui le concernent pour trouver le meilleur
-chemin.
-• lorsqu'il se déplace, le monstre suit eectivement le meilleur chemin et parvient
-jusqu'au héros même s'il y a des obstacles.
-• vous pourrez vous inspirer (a) des transparents "IA dans le jeu vidéo" (transparents 112-130) ou (b) (c) du site redblob (avec de nombreuses démonstrations
-autour du jeu vidéo)
-(a) https://members.loria.fr/VThomas/mediation/JV_IUT_2016/#ia
-(b) http://www.redblobgames.com/pathfinding/a-star/introduction.html
-(c) http://www.redblobgames.com/pathfinding/tower-defense/
-
-2.5 Monstres avec intelligence variable
-En plus d'être de type diérents (orc, troll, fantôme), les monstres peuvent avoir
-des degré d'intelligence diérent. En fonction de ce degré d'intelligence, ils se déplacent
-diéremment.
-Critères de validation
-• Un monstre d'intelligence nulle reste immobile.
-• Un monstre d'intelligence faible se déplace au hasard.
-• Un monstre d'intelligence moyenne cherche à se rapprocher du héros sans prendre
-en compte les obstacles.
-• Un monstre d'intelligence forte se rapproche du héros en évitant les obstacles.
-• Plusieurs monstres avec des intelligences diérentes peuvent être présents dans le
-même labyrinthe.
-• Chaque type de monstre (Orc, Fantome, Troll) peut avoir n'importe quel type
-d'intelligence. On peut avoir dans le même labyrinthe des Orc d'intelligence nulle,
-faible, moyenne et forte. Idem pour les trolls et les fantômes.
-COO- TD - Projet Zeldiabolo - Liste des fonctionnalités 8
-• pour tester que cela fonctionne, il faut créer un seul labyrinthe contenant tous les
-couples (type de monstre/intelligence).
-
-génération de plusieurs monstre
 
 5.3 Affichage des attaques
 Quand un monstre ou le héros attaque, il change de couleur.
