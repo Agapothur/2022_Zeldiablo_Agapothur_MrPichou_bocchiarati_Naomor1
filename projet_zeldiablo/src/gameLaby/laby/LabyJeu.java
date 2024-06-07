@@ -12,6 +12,7 @@ public class LabyJeu implements Jeu {
     private Labyrinthe[] labyrinthes;
     private String[] noms;
     int current;
+    String last;
 
     /**
      * Constructeur de la classe LabyJeu.
@@ -32,18 +33,28 @@ public class LabyJeu implements Jeu {
     public void update(double deltaTime, Clavier clavier) throws IOException {
         if (clavier.haut) {
             this.labyrinthes[current].deplacerPerso(Labyrinthe.HAUT);
+            last = Labyrinthe.HAUT;
         }
         if (clavier.bas) {
             this.labyrinthes[current].deplacerPerso(Labyrinthe.BAS);
+            last = Labyrinthe.BAS;
         }
         if (clavier.gauche) {
             this.labyrinthes[current].deplacerPerso(Labyrinthe.GAUCHE);
+            last = Labyrinthe.GAUCHE;
         }
         if (clavier.droite) {
             this.labyrinthes[current].deplacerPerso(Labyrinthe.DROITE);
+            last = Labyrinthe.DROITE;
         }
-
+        if (clavier.space) {
+            int[][] directions = labyrinthes[current].pj.attaqueDirectionelle(last);
+            labyrinthes[current].monstreEstSurCase(directions[0], labyrinthes[current].pj.getForce());
+            labyrinthes[current].monstreEstSurCase(directions[1], labyrinthes[current].pj.getForce());
+        }
         setLabyrinthe();
+        System.out.println("PV Monstre : " + labyrinthes[current].monstre.getPv());
+
 
     }
 
