@@ -41,6 +41,8 @@ public class LabyDessin implements DessinJeu {
         for (int j = 0; j < laby.getLength(); j++) {
             for (int i = 0; i < laby.getLengthY(); i++) {
                 if (laby.getMur(j, i)) {
+                    Image img = new Image("image/Biden.jpg");
+                    gc.setFill(new ImagePattern(img));
                     gc.fillRect(j * TAILLE, i * TAILLE, TAILLE, TAILLE);
                 }
             }
@@ -50,8 +52,10 @@ public class LabyDessin implements DessinJeu {
         if (labyrinthe.getLabyrinthe().sortie != null) {
             double sortiex = labyrinthe.getLabyrinthe().sortie.getX();
             double sortiey = labyrinthe.getLabyrinthe().sortie.getY();
-            gc.setFill(Color.rgb(86,72,23));
-            gc.fillOval(sortiex * TAILLE, sortiey * TAILLE, TAILLE, TAILLE);
+            //gc.setFill(Color.rgb(86,72,23));
+            Image img = new Image("image/trapdoor.jpg");
+            gc.setFill(new ImagePattern(img));
+            gc.fillRect(sortiex * TAILLE, sortiey * TAILLE, TAILLE, TAILLE);
         }
 
         // perso
