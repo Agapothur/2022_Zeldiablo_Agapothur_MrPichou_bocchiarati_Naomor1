@@ -48,18 +48,21 @@ public class LabyDessin implements DessinJeu {
             for(int i = 0; i<7;i++){
                 ip[i] = new ImagePattern(new Image("image/floor_"+(i+1)+".png"));
             }
-            Random random = new Random();
-            for (int i = 0; i < 14; i++) {
-                for (int y = 0; y < 20; y++) {
-                    ip2[i+y] = (ip[0]);
-                }
+
+            for (int i = 0; i < 255; i++) {
+                ip2[i] = (ip[(int)(Math.random()*7)]);
             }
             this.first = false;
         }
+        int u = 0;
         for(int i =0;i<14;i++){
             for(int y=0;y<20;y++){
-                gc.setFill(ip2[i+y]);
+                gc.setFill(ip2[u]);
                 gc.fillRect(y*TAILLE,i*TAILLE, TAILLE, TAILLE);
+                u+= 1;
+                if (u == 254){
+                    u = 0;
+                }
             }
         }
 //        gc.setFill(ip[2]);
