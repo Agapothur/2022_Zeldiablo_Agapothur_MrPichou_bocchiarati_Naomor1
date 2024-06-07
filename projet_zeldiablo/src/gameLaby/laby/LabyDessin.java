@@ -5,11 +5,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
 import moteurJeu.DessinJeu;
 import moteurJeu.Jeu;
-
-import java.util.Random;
 
 /**
  * Classe LabyDessin
@@ -126,31 +123,32 @@ public class LabyDessin implements DessinJeu {
         }
 
         gc.fillRect(persox * TAILLE, persoy * TAILLE, TAILLE, TAILLE);
-
         // monstre
-        if (labyrinthe.getLabyrinthe().monstre != null) {
-            double monstrex = labyrinthe.getLabyrinthe().monstre.getX();
-            double monstrey = labyrinthe.getLabyrinthe().monstre.getY();
-            switch (nbframe) {
-                case 0 -> {
-                    Image img = new Image("image/big_demon_idle_anim_f0.png");
-                    gc.setFill(new ImagePattern(img));
+        for(Monstre m : labyrinthe.getLabyrinthe().monstres){
+            if (m != null) {
+                double monstrex = m.getX();
+                double monstrey = m.getY();
+                switch (nbframe) {
+                    case 0 -> {
+                        Image img = new Image("image/big_demon_idle_anim_f0.png");
+                        gc.setFill(new ImagePattern(img));
+                    }
+                    case 1 -> {
+                        Image img = new Image("image/big_demon_idle_anim_f1.png");
+                        gc.setFill(new ImagePattern(img));
+                    }
+                    case 2 -> {
+                        Image img = new Image("image/big_demon_idle_anim_f2.png");
+                        gc.setFill(new ImagePattern(img));
+                    }
+                    case 3 -> {
+                        Image img = new Image("image/big_demon_idle_anim_f3.png");
+                        gc.setFill(new ImagePattern(img));
+                    }
                 }
-                case 1 -> {
-                    Image img = new Image("image/big_demon_idle_anim_f1.png");
-                    gc.setFill(new ImagePattern(img));
-                }
-                case 2 -> {
-                    Image img = new Image("image/big_demon_idle_anim_f2.png");
-                    gc.setFill(new ImagePattern(img));
-                }
-                case 3 -> {
-                    Image img = new Image("image/big_demon_idle_anim_f3.png");
-                    gc.setFill(new ImagePattern(img));
-                }
-            }
 
-            gc.fillRect(monstrex * TAILLE, monstrey * TAILLE, TAILLE, TAILLE);
+                gc.fillRect(monstrex * TAILLE, monstrey * TAILLE, TAILLE, TAILLE);
+            }
         }
         //amulette
         if (labyrinthe.getLabyrinthe().amulette != null) {

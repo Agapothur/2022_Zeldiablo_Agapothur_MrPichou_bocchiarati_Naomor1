@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 /**
  * classe labyrinthe. represente un labyrinthe avec
@@ -37,7 +36,7 @@ Labyrinthe {
      * attributs du personnage et du monstre
      */
     public Perso pj;
-    public Monstre monstre;
+    public Monstre[] monstres;
     public Amulette amulette;
     public Sortie sortie;
     public Echelle[] echelles;
@@ -105,7 +104,7 @@ Labyrinthe {
         // creation labyrinthe vide
         this.murs = new boolean[nbColonnes][nbLignes];
         this.pj = null;
-        this.monstre = null;
+        this.monstres = null;
         this.amulette = null;
         this.random = new Random();
         this.sortie = null;
@@ -114,6 +113,7 @@ Labyrinthe {
         this.boucliers = new Bouclier[5];
         int numBouclier = 0;
         int numArme = 0;
+        this.monstres = new Monstre[0];
 
         // lecture des cases
         String ligne = bfRead.readLine();
@@ -144,7 +144,7 @@ Labyrinthe {
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
                         // ajoute Monstre
-                        this.monstre = new Monstre(colonne, numeroLigne);
+                        ajouterMonstre(new Monstre(colonne, numeroLigne));
                         break;
                     case AMULETTE:
                         // pas de mur
@@ -201,6 +201,13 @@ Labyrinthe {
 
     }
 
+    private void ajouterMonstre(Monstre monstre) {
+        Monstre[] temp = new Monstre[monstres.length+1];
+        System.arraycopy(monstres, 0, temp, 0, monstres.length);
+        temp[monstres.length] = monstre;
+        monstres = temp;
+    }
+
     /**
      * deplace le personnage en fonction de l'action.
      * gere la collision avec les murs et le monstre
@@ -216,7 +223,12 @@ Labyrinthe {
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
         // si c'est pas un mur et pas le monstre, on effectue le deplacement
-        if (!this.murs[suivante[0]][suivante[1]] && (this.monstre.x != suivante[0] || this.monstre.y != suivante[1])) {
+        boolean monstreDevant = false;
+        for(Monstre m : monstres){
+            if(m.x == suivante[0] && m.y == suivante[1])
+                monstreDevant = true;
+        }
+        if (!this.murs[suivante[0]][suivante[1]] && !monstreDevant) {
             // on met a jour personnage
             this.pj.x = suivante[0];
             this.pj.y = suivante[1];
@@ -240,7 +252,9 @@ Labyrinthe {
         }
 //        String actions = ACTIONS[random.nextInt(ACTIONS.length)];
 //        deplacerMonstreAleatoire(actions);
-        deplacerMonstreAttire();
+        for(Monstre m : monstres) {
+            deplacerMonstreAttire(m);
+        }
     }
     /**
      * deplace le monstre en fonction de l'action.
@@ -248,19 +262,19 @@ Labyrinthe {
      *
      * @param action une des actions possibles
      */
-    public void deplacerMonstreAleatoire(String action) {
-        if (monstre.getPv() > 0) {
+    public void deplacerMonstreAleatoire(Monstre m, String action) {
+        if (m.getPv() > 0) {
             boolean attaque = false;
-            int[] courante = {this.monstre.x, this.monstre.y};
+            int[] courante = {m.x, m.y};
             int[] suivante = getSuivant(courante[0], courante[1], action);
 
 
             for (int i = -1; i < 2; i++) {
                 for (int j = -1; j < 2; j++) {
-                    if (this.monstre.x - j == this.pj.x && this.monstre.y - i == this.pj.y) {
+                    if (m.x - j == this.pj.x && m.y - i == this.pj.y) {
                         this.pj.subirdegat(1);
                         System.out.println(this.pj.getVie());
-                        this.monstre.setCouleur(Color.RED);
+                        m.setCouleur(Color.RED);
                         attaque = true;
                         if (this.pj.getVie() == 0) {
                             System.out.println("Bro's dead, RIP Bozo");
@@ -271,8 +285,8 @@ Labyrinthe {
             }
 
             if (!this.murs[suivante[0]][suivante[1]] && (this.pj.x != suivante[0] || this.pj.y != suivante[1]) && !attaque) {
-                this.monstre.x = suivante[0];
-                this.monstre.y = suivante[1];
+                m.x = suivante[0];
+                m.y = suivante[1];
             }
         }
     }
@@ -281,12 +295,12 @@ Labyrinthe {
 
 
 
-    public void deplacerMonstreAttire() {
+    public void deplacerMonstreAttire(Monstre m) {
 
-        if(monstre.getPv() > 0){
-            this.monstre.setCouleur(Color.PURPLE);
+        if(m.getPv() > 0){
+            m.setCouleur(Color.PURPLE);
             boolean attaque = false;
-            int[] courante = {this.monstre.x, this.monstre.y};
+            int[] courante = {m.x, m.y};
             String action = "";
             if (courante[0] < this.pj.x) {
                 action = ACTIONS[3];
@@ -316,10 +330,10 @@ Labyrinthe {
 
             for (int i = -1; i < 2; i++) {
                 for (int j = -1; j < 2; j++) {
-                    if (this.monstre.x - j == this.pj.x && this.monstre.y - i == this.pj.y) {
+                    if (m.x - j == this.pj.x && m.y - i == this.pj.y) {
                         this.pj.subirdegat(1);
                         System.out.println(this.pj.getVie());
-                        this.monstre.setCouleur(Color.RED);
+                        m.setCouleur(Color.RED);
                         attaque = true;
                         if (this.pj.getVie() == 0) {
                             endScreen(false);
@@ -327,8 +341,8 @@ Labyrinthe {
                     }
                 }
                 if (!this.murs[suivante[0]][suivante[1]] && (this.pj.x != suivante[0] || this.pj.y != suivante[1]) && !attaque) {
-                    this.monstre.x = suivante[0];
-                    this.monstre.y = suivante[1];
+                    m.x = suivante[0];
+                    m.y = suivante[1];
                 }
             }
         }
@@ -377,15 +391,15 @@ Labyrinthe {
         return this.murs[x][y];
     }
 
-    public void monstreEstSurCase(int[] position, int degats) {
-        if (monstre.getX() == position[0] && monstre.getY() == position[1]) {
-            monstre.subirDegats(degats);
+    public void monstreEstSurCase(Monstre m, int[] position, int degats) {
+        if (m.getX() == position[0] && m.getY() == position[1]) {
+            m.subirDegats(degats);
         }
     }
 
-    public void nePlusAfficherMonstre() {
-        monstre.x = 999;
-        monstre.y = 999;
+    public void nePlusAfficherMonstre(Monstre m) {
+        m.x = 999;
+        m.y = 999;
     }
 
     public void endScreen(boolean win){
