@@ -1,0 +1,74 @@
+11.3 Gestion d'un menu
+Plutot que de lancer directement le jeu, le joueur lance un menu qui lui permet de
+lancer le jeu ou de quitter l'application. Ce menu ré-apparait lorsque le joueur gagne
+ou perd.
+Critères de validation
+• Le menu possède une image spécique.
+• Le menu propose deux options jouer ou quitter.
+• Le menu s'ache dans la même JFrame que le rendu du jeu.
+• Pendant le menu, le jeu n'est pas créé et ne tourne pas
+
+
+11.1 Affichage avec des sprites
+La fenêtre n'ache plus des gures de base (rond, ...) mais des sprites représentant
+les personnages et les objets
+(http://fr.wikipedia.org/wiki/Sprite_%28jeu_vid%C3%A9o%29).
+Critères de validation
+• Les sprites concernent les murs, les monstres et le héros.
+• Ils sont chargés une fois pour toute au lancement de l'application et ils peuvent
+être achés dans le JPanel grâce à la méthode drawImage.
+• Vous pourrez utiliser l'image http://www.qcfdesign.com/?p=354 qui est un ensemble de sprites pour le jeu Desktop Dungeons. Ces sprites sont disposés régulièrement dans l'image et sont donc facile à extraire à partir de l'Image.
+• Il est possible de charger une image (de type BufferedImage en mémoire grâce à
+la classe ImageIO et la méthode statique read).
+
+7.1 Inventaire
+Des objets (sans utilité pour le moment) sont disposés dans des cases vides du labyrinthe, lorsque le héros appuie sur la touche d'utilisation ("E" par défaut), il récupère
+les objets de la case où il se trouve et les ajoute dans son inventaire.
+Critères de validation
+• L'inventaire est de taille innie.
+• Lorsque le joueur cherche à prendre un objet alors qu'il n'y a rien sur la case où
+il se trouve, rien ne se passe.
+• Lorsqu'un joueur prend un objet, l'objet disparait du labyrinthe (et n'est plus
+aché) mais apparait dans son inventaire.
+• A chaque évolution du jeu, le jeu ache dans la console l'inventaire du héros.
+• Les objets sont achés dans le labyrinthe tant qu'ils sont présents (sous la forme
+d'un cercle noir)
+
+7.2 Armes
+Les armes sont des objets que le héros peut prendre. Une arme augmente d'un
+certain nombre les dégâts du héros.
+Critères de validation
+• Une arme est dénie par ses dégâts.
+• Lorsque le héros prend une arme, l'arme est ajoutée à son inventaire et disparait
+du labyrinthe.
+• Lorsqu'un héros possède une arme et attaque un monstre, son attaque est augmentée des dégâts de l'arme.
+• Un héros ne peut utiliser qu'une seule arme à la fois. Lorsqu'un héros possède
+plusieurs armes dans son inventaire, il s'équipe automatiquement de l'arme la
+plus forte.
+
+7.3 Boucliers
+Les boucliers sont des objets que le héros peut prendre. Un bouclier fournit une
+protection temporaire et augmente les dégâts que le héros peut subir.
+Critères de validation
+• Un bouclier est déni par sa protection.
+• Lorsque le héros prend un bouclier, le bouclier est ajouté à son inventaire et
+disparait du labyrinthe.
+COO- TD - Projet Zeldiabolo - Liste des fonctionnalités 18
+• Lorsqu'un héros subit des dégâts, c'est d'abord la protection du bouclier qui diminue avant que le joueur ne perde des points de vie.
+• Lorsqu'un bouclier n'a plus de protection, il est détruit.
+• Un héros ne peut utiliser qu'un seul bouclier à la fois. Lorsqu'un joueur reçoit
+un coup, il s'équipe automatiquement du bouclier qui est le plus protecteur à ce
+moment.
+
+7.4 Achage de l'inventaire
+L'inventaire est aché dans la fenêtre de jeu.
+Critères de validation
+• L'inventaire est représenté par 6 cases carrées en bas de la fenêtre de jeu
+• A chaque fois qu'un joueur prend un objet, en plus de disparaitre dans le labyrinthe, celui-ci s'ache dans l'inventaire
+• Les objets sélectionnés (meilleure arme et meilleur bouclier) sont d'une couleur
+diérente.
+• Les objets achés dans l'inventaire ont des formes spéciques (rond pour un
+bouclier et un trait vertical pour une arme).
+• Lorsqu'un bouclier est détruit, il disparait de l'inventaire.
+
+plusieurs monstres
