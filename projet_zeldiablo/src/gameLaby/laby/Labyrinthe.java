@@ -1,9 +1,12 @@
 package gameLaby.laby;
 
+import javafx.scene.paint.Color;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * classe labyrinthe. represente un labyrinthe avec
@@ -180,6 +183,7 @@ Labyrinthe {
      * @param action une des actions possibles
      */
     public void deplacerPerso(String action) {
+
         // case courante
         int[] courante = {this.pj.x, this.pj.y};
 
@@ -213,7 +217,6 @@ Labyrinthe {
         String actions = ACTIONS[random.nextInt(ACTIONS.length)];
         deplacerMonstreAleatoire(actions);
     }
-
     /**
      * deplace le monstre en fonction de l'action.
      * gere la collision avec les murs et le personnage

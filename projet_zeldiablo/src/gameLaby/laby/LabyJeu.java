@@ -1,5 +1,6 @@
 package gameLaby.laby;
 
+import javafx.scene.paint.Color;
 import moteurJeu.Clavier;
 import moteurJeu.Jeu;
 
