@@ -19,6 +19,7 @@ public class MainLaby {
             LabyDessin dessin = new LabyDessin();
             MoteurJeu.launch(jeu, dessin);
 
+
         } catch (Exception e) {
             e.printStackTrace();
         }

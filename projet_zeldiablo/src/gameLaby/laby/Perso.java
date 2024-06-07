@@ -1,6 +1,8 @@
 package gameLaby.laby;
 
 
+import javafx.scene.paint.Color;
+
 /**
  * gere un personnage situe en x,y
  */
@@ -17,6 +19,7 @@ public class Perso {
     private int vie;
     private int force;
 
+    public Color couleur = Color.RED;
     /**
      * constructeur
      *
@@ -89,6 +92,14 @@ public class Perso {
         return this.vie;
     }
 
+    public Color getCouleur(){
+        return this.couleur;
+    }
+
+    public void setCouleur(Color c) {
+        this.couleur = c;
+    }
+
     public int getForce() {
         return force;
     }
@@ -106,5 +117,6 @@ public class Perso {
             default:
                 return new int[][]{{0,0},{0,0}};
         }
+
     }
 }
