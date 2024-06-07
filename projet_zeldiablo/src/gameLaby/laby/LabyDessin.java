@@ -9,15 +9,20 @@ import javafx.scene.shape.Circle;
 import moteurJeu.DessinJeu;
 import moteurJeu.Jeu;
 
+import java.util.Random;
+
 /**
  * Classe LabyDessin
  */
+
+
 public class LabyDessin implements DessinJeu {
 
     public static final int TAILLE = 50;
 
     public Canvas c;
-
+    private boolean first = true;
+    private final ImagePattern[] ip2 = new ImagePattern[255];
 
     /**
      *
@@ -31,9 +36,38 @@ public class LabyDessin implements DessinJeu {
 
         final GraphicsContext gc = canvas.getGraphicsContext2D();
 
+        //tout les sols
+
+
         // fond
-        gc.setFill(Color.WHITE);
-        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        if(first) {
+            ImagePattern[] ip = new ImagePattern[7];
+
+            for(int i = 0; i<7;i++){
+                ip[i] = new ImagePattern(new Image("image/floor_"+(i+1)+".png"));
+            }
+            Random random = new Random();
+            for (int i = 0; i < 14; i++) {
+                for (int y = 0; y < 20; y++) {
+                    ip2[i+y] = (ip[0]);
+                }
+            }
+            this.first = false;
+        }
+        for(int i =0;i<14;i++){
+            for(int y=0;y<20;y++){
+                gc.setFill(ip2[i+y]);
+                gc.fillRect(y*TAILLE,i*TAILLE, TAILLE, TAILLE);
+            }
+        }
+//        gc.setFill(ip[2]);
+//        gc.fillRect(0, 0, canvas.getWidth(),canvas.getHeight() );
+
+
+
+
+
+
 
         // dessin Labyrinthe
         gc.setFill(Color.rgb(30, 30, 30));
@@ -41,8 +75,8 @@ public class LabyDessin implements DessinJeu {
         for (int j = 0; j < laby.getLength(); j++) {
             for (int i = 0; i < laby.getLengthY(); i++) {
                 if (laby.getMur(j, i)) {
-                    Image img = new Image("image/Biden2.png");
-                    gc.setFill(new ImagePattern(img));
+
+                    gc.setFill(Color.BLACK);
                     gc.fillRect(j * TAILLE, i * TAILLE, TAILLE, TAILLE);
                 }
             }
