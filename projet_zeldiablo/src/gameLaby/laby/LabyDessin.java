@@ -64,7 +64,7 @@ public class LabyDessin implements DessinJeu {
         if (labyrinthe.getLabyrinthe().monstre != null) {
             double monstrex = labyrinthe.getLabyrinthe().monstre.getX();
             double monstrey = labyrinthe.getLabyrinthe().monstre.getY();
-            gc.setFill(Color.rgb(127,0,255));
+            gc.setFill(labyrinthe.getLabyrinthe().monstre.getCouleur());
             gc.fillOval(monstrex * TAILLE, monstrey * TAILLE, TAILLE, TAILLE);
         }
         //amulette

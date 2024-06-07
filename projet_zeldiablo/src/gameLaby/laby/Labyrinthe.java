@@ -235,6 +235,7 @@ Labyrinthe {
                 if(this.monstre.x-j==this.pj.x && this.monstre.y-i==this.pj.y){
                     this.pj.subirdegat(1);
                     System.out.println(this.pj.getVie());
+                    this.monstre.setCouleur(Color.RED);
                     attaque = true;
                     if(this.pj.getVie()==0){
                         System.out.println("Bro's dead, RIP Bozo");
@@ -250,6 +251,7 @@ Labyrinthe {
     }
 
     public void deplacerMonstreAttire() {
+        this.monstre.setCouleur(Color.PURPLE);
         boolean attaque = false;
         int[] courante = {this.monstre.x, this.monstre.y};
         String action = "";
@@ -283,6 +285,7 @@ Labyrinthe {
                 if(this.monstre.x-j==this.pj.x && this.monstre.y-i==this.pj.y){
                     this.pj.subirdegat(1);
                     System.out.println(this.pj.getVie());
+                    this.monstre.setCouleur(Color.RED);
                     attaque = true;
                     if(this.pj.getVie()==0){
                         System.out.println("Bro's dead, RIP Bozo");
