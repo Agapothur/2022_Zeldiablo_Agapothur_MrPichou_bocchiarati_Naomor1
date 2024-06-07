@@ -41,7 +41,7 @@ public class LabyDessin implements DessinJeu {
         for (int j = 0; j < laby.getLength(); j++) {
             for (int i = 0; i < laby.getLengthY(); i++) {
                 if (laby.getMur(j, i)) {
-                    Image img = new Image("image/Biden.jpg");
+                    Image img = new Image("image/Biden2.png");
                     gc.setFill(new ImagePattern(img));
                     gc.fillRect(j * TAILLE, i * TAILLE, TAILLE, TAILLE);
                 }
