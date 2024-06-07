@@ -59,7 +59,8 @@ public class LabyJeu implements Jeu {
             int[][] directions = labyrinthes[current].pj.attaqueDirectionelle(last);
             this.labyrinthes[current].pj.setCouleur(Color.ORANGE);
             labyrinthes[current].monstreEstSurCase(directions[0], labyrinthes[current].pj.getForce());
-            labyrinthes[current].monstreEstSurCase(directions[1], labyrinthes[current].pj.getForce());
+            if(!labyrinthes[current].getMur(directions[0][0], directions[0][1]))
+                labyrinthes[current].monstreEstSurCase(directions[1], labyrinthes[current].pj.getForce());
         }
         setLabyrinthe();
 
