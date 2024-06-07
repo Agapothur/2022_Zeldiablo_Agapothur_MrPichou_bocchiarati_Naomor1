@@ -14,7 +14,7 @@ public class LabyJeu implements Jeu {
     private Labyrinthe[] labyrinthes;
     private String[] noms;
     int current;
-    String last;
+    public String last;
 
     Save saves;
 
