@@ -123,4 +123,8 @@ public class Perso {
     public void setVie(int pv) {
         this.vie = pv;
     }
+
+    public int[] getPos(){
+        return new int[]{x,y};
+    }
 }

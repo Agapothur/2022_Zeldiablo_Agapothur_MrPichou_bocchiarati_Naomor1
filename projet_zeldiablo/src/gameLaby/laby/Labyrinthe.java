@@ -20,20 +20,13 @@ Labyrinthe {
     /**
      * Constantes char
      */
-    public static final char MUR = 'X';
-    public static final char PJ = 'P';
-    public static final char MONSTRE = 'M';
-    public static final char AMULETTE = 'A';
-    public static final char VIDE = '.';
-    public static final char SORTIE = 'S';
+    public static final char MUR = 'X', PJ = 'P', MONSTRE = 'M', AMULETTE = 'A', VIDE = '.', SORTIE = 'S',
+            ECHELLE1 = '1', ECHELLE2 = '2', ECHELLE3 = '3', ECHELLE4 = '4';
 
     /**
      * constantes actions possibles
      */
-    public static final String HAUT = "Haut";
-    public static final String BAS = "Bas";
-    public static final String GAUCHE = "Gauche";
-    public static final String DROITE = "Droite";
+    public static final String HAUT = "Haut", BAS = "Bas", GAUCHE = "Gauche", DROITE = "Droite";
 
     // Ajoutez les constantes pour les directions possibles
     public static final String[] ACTIONS = {HAUT, BAS, GAUCHE, DROITE};
@@ -44,20 +37,18 @@ Labyrinthe {
      */
     public Perso pj;
     public Monstre monstre;
-
     public Amulette amulette;
-
     public Sortie sortie;
+    public Echelle[] echelles;
 
     /**
      * les murs du labyrinthe
      */
     public boolean[][] murs;
-
     private Random random;
+    private boolean amulettepresente, sortiepresente;
 
-    private boolean amulettepresente;
-    private boolean sortiepresente;
+
     /**
      * retourne la case suivante selon une actions
      *
@@ -87,8 +78,7 @@ Labyrinthe {
             default:
                 throw new Error("action inconnue");
         }
-        int[] res = {x, y};
-        return res;
+        return new int[]{x, y};
     }
 
     /**
@@ -116,6 +106,7 @@ Labyrinthe {
         this.amulette = null;
         this.random = new Random();
         this.sortie = null;
+        this.echelles = new Echelle[]{null, null, null, null};
 
         // lecture des cases
         String ligne = bfRead.readLine();
@@ -161,6 +152,22 @@ Labyrinthe {
                         // ajoute amulette
                         this.sortie = new Sortie(colonne, numeroLigne);
                         this.sortiepresente = true;
+                        break;
+                    case ECHELLE1 :
+                        this.murs[colonne][numeroLigne] = false;
+                        this.echelles[0] = new Echelle(colonne, numeroLigne);
+                        break;
+                    case ECHELLE2 :
+                        this.murs[colonne][numeroLigne] = false;
+                        this.echelles[1] = new Echelle(colonne, numeroLigne);
+                        break;
+                    case ECHELLE3 :
+                        this.murs[colonne][numeroLigne] = false;
+                        this.echelles[2] = new Echelle(colonne, numeroLigne);
+                        break;
+                    case ECHELLE4 :
+                        this.murs[colonne][numeroLigne] = false;
+                        this.echelles[3] = new Echelle(colonne, numeroLigne);
                         break;
                     default:
                         throw new Error("caractere inconnu " + c);
@@ -210,8 +217,7 @@ Labyrinthe {
         if(this.sortiepresente) {
             if (this.sortie.x == suivante[0] && this.sortie.y == suivante[1]) {
                 if (this.pj.getAmulette()) {
-                    System.out.println("WIIIINNNNNNNNN");
-                    System.exit(0);
+                    endScreen(true);
                 }
             }
         }
@@ -299,8 +305,7 @@ Labyrinthe {
                         this.monstre.setCouleur(Color.RED);
                         attaque = true;
                         if (this.pj.getVie() == 0) {
-                            System.out.println("Bro's dead, RIP Bozo");
-                            System.exit(1);
+                            endScreen(false);
                         }
                     }
                 }
@@ -321,9 +326,11 @@ Labyrinthe {
         return false;
     }
 
-    // ##################################
+
     // GETTER
     // ##################################
+    // ##################################
+
 
     /**
      * return taille selon Y
@@ -362,5 +369,15 @@ Labyrinthe {
     public void nePlusAfficherMonstre() {
         monstre.x = 999;
         monstre.y = 999;
+    }
+
+    public void endScreen(boolean win){
+        if(win){
+            System.out.print("You Win");
+        }
+        else{
+            System.out.print("YouLose");
+        }
+        System.exit(0);
     }
 }

@@ -9,7 +9,7 @@ public class MainLaby {
         MoteurJeu.setFPS(10);
 
         try {
-            String[] noms = new String[3];
+            String[] noms = new String[4];
             for(int i = 0; i<noms.length; i++){
                 noms[i] = "projet_zeldiablo/labySimple/e0" + i + ".txt";
             }
