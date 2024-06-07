@@ -44,7 +44,7 @@ couples (type de monstre/intelligence).
 
 génération de plusieurs monstre
 
-5.3 Achage des attaques
+5.3 Affichage des attaques
 Quand un monstre ou le héros attaque, il change de couleur.
 Critères de validation
 • La couleur d'achage du monstre change au moment où il attaque (passe de rouge

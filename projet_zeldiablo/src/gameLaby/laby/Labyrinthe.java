@@ -211,7 +211,7 @@ Labyrinthe {
             }
         }
         String actions = ACTIONS[random.nextInt(ACTIONS.length)];
-        deplacerMonstre(actions);
+        deplacerMonstreAleatoire(actions);
     }
 
     /**
@@ -220,7 +220,7 @@ Labyrinthe {
      *
      * @param action une des actions possibles
      */
-    public void deplacerMonstre(String action) {
+    public void deplacerMonstreAleatoire(String action) {
         boolean attaque = false;
         int[] courante = {this.monstre.x, this.monstre.y};
         int[] suivante = getSuivant(courante[0], courante[1], action);
