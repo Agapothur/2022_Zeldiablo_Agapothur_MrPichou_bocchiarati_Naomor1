@@ -3,12 +3,12 @@ package gameLaby.laby;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.transform.Rotate;
 import moteurJeu.DessinJeu;
 import moteurJeu.Jeu;
+
+import java.util.Objects;
 
 /**
  * Classe LabyDessin
@@ -94,7 +94,7 @@ public class LabyDessin implements DessinJeu {
             double sortiex = labyrinthe.getLabyrinthe().sortie.getX();
             double sortiey = labyrinthe.getLabyrinthe().sortie.getY();
             //gc.setFill(Color.rgb(86,72,23));
-            Image img = new Image("image/trapdoor.jpg");
+            Image img = new Image("image/doors_leaf_closed.png");
             gc.setFill(new ImagePattern(img));
             gc.fillRect(sortiex * TAILLE, sortiey * TAILLE, TAILLE, TAILLE);
         }
@@ -108,6 +108,17 @@ public class LabyDessin implements DessinJeu {
                 gc.setFill(new ImagePattern(img));
                 gc.fillRect(armex * TAILLE+((double) TAILLE /4), armey * TAILLE, (double) TAILLE /2, TAILLE);
             }
+        }
+
+        //bouclier
+        if(!labyrinthe.getLabyrinthe().pj.possedeBouclier()) {
+
+                double bouclierx = labyrinthe.getLabyrinthe().boucliers[0].getX();
+                double boucliery = labyrinthe.getLabyrinthe().boucliers[0].getY();
+                Image img = new Image("image/shield.png");
+                gc.setFill(new ImagePattern(img));
+                gc.fillRect(bouclierx * TAILLE, boucliery * TAILLE,TAILLE, TAILLE);
+
         }
 
         // perso
@@ -135,8 +146,7 @@ public class LabyDessin implements DessinJeu {
             }
         }
         gc.fillRect(persox * TAILLE, persoy * TAILLE, TAILLE, TAILLE);
-        System.out.println(labyrinthe.getLabyrinthe().pj.getIsAttaque());
-        if(labyrinthe.getLabyrinthe().pj.getIsAttaque()!=""){
+        if(!Objects.equals(labyrinthe.getLabyrinthe().pj.getIsAttaque(), "")){
             if(labyrinthe.getLabyrinthe().pj.possedeArme()) {
                 switch (labyrinthe.getLabyrinthe().pj.getIsAttaque()) {
                     case "droite" -> {
@@ -206,7 +216,7 @@ public class LabyDessin implements DessinJeu {
                     }
 
                     default -> {
-                        Image img = new Image("image/weapon_red_gem_sword.png");
+                        Image img = new Image("image/weapon_rusty_sword.png");
                         gc.setFill(new ImagePattern(img));
                         gc.fillRect(persox * TAILLE, persoy * TAILLE, (double) TAILLE / 2, TAILLE);
                         labyrinthe.getLabyrinthe().pj.setAttaque("");
