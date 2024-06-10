@@ -136,22 +136,25 @@ public class LabyDessin implements DessinJeu {
         System.out.println(labyrinthe.getLabyrinthe().pj.getIsAttaque());
         if(labyrinthe.getLabyrinthe().pj.getIsAttaque()!=""){
             switch (labyrinthe.getLabyrinthe().pj.getIsAttaque()) {
-                case "droite" ->{Image img = new Image("image/weapon_red_gem_sword.png");
+                case "droite" ->{Image img = new Image("image/weapon_red_gem_sword_right.png");
                     gc.setFill(new ImagePattern(img));
-                    gc.fillRect(persox * TAILLE+20, persoy * TAILLE, (double) TAILLE /2, TAILLE);
+                    gc.fillRect(persox * TAILLE+TAILLE, persoy * TAILLE+((double) TAILLE /4), TAILLE, (double) TAILLE/2);
                     labyrinthe.getLabyrinthe().pj.setAttaque("");}
 
-                case "gauche" ->{Image img = new Image("image/weapon_red_gem_sword.png");
+                case "gauche" ->{Image img = new Image("image/weapon_red_gem_sword_left.png");
                     gc.setFill(new ImagePattern(img));
-                    gc.fillRect(persox * TAILLE-20, persoy * TAILLE, (double) TAILLE /2, TAILLE);labyrinthe.getLabyrinthe().pj.setAttaque("");}
+                    gc.fillRect(persox * TAILLE-TAILLE, persoy * TAILLE+((double) TAILLE /4), TAILLE, (double) TAILLE/2);
+                    labyrinthe.getLabyrinthe().pj.setAttaque("");}
 
                 case "haut" ->{Image img = new Image("image/weapon_red_gem_sword.png");
                     gc.setFill(new ImagePattern(img));
-                    gc.fillRect(persox * TAILLE, persoy * TAILLE-20, (double) TAILLE /2, TAILLE);labyrinthe.getLabyrinthe().pj.setAttaque("");}
+                    gc.fillRect(persox * TAILLE+((double) TAILLE /4), persoy * TAILLE-TAILLE, (double) TAILLE /2, TAILLE);
+                    labyrinthe.getLabyrinthe().pj.setAttaque("");}
 
-                case "bas" ->{Image img = new Image("image/weapon_red_gem_sword.png");
+                case "bas" ->{Image img = new Image("image/weapon_red_gem_sword_down.png");
                     gc.setFill(new ImagePattern(img));
-                    gc.fillRect(persox * TAILLE, persoy * TAILLE+20, (double) TAILLE /2, TAILLE);labyrinthe.getLabyrinthe().pj.setAttaque("");}
+                    gc.fillRect(persox * TAILLE+((double) TAILLE /4), persoy * TAILLE+TAILLE, (double) TAILLE /2, TAILLE);
+                    labyrinthe.getLabyrinthe().pj.setAttaque("");}
 
                 default -> {Image img = new Image("image/weapon_red_gem_sword.png");
                     gc.setFill(new ImagePattern(img));
