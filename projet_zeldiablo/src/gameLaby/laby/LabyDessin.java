@@ -101,7 +101,7 @@ public class LabyDessin implements DessinJeu {
 
         //arme
         if(!labyrinthe.getLabyrinthe().pj.possedeArme()) {
-            if (labyrinthe.getLabyrinthe().armes != null) {
+            if (labyrinthe.getLabyrinthe().armes[0] != null) {
                 double armex = labyrinthe.getLabyrinthe().armes[0].getX();
                 double armey = labyrinthe.getLabyrinthe().armes[0].getY();
                 Image img = new Image("image/weapon_red_gem_sword.png");
@@ -112,13 +112,13 @@ public class LabyDessin implements DessinJeu {
 
         //bouclier
         if(!labyrinthe.getLabyrinthe().pj.possedeBouclier()) {
-
+            if (labyrinthe.getLabyrinthe().boucliers[0] != null) {
                 double bouclierx = labyrinthe.getLabyrinthe().boucliers[0].getX();
                 double boucliery = labyrinthe.getLabyrinthe().boucliers[0].getY();
                 Image img = new Image("image/shield.png");
                 gc.setFill(new ImagePattern(img));
-                gc.fillRect(bouclierx * TAILLE, boucliery * TAILLE,TAILLE, TAILLE);
-
+                gc.fillRect(bouclierx * TAILLE, boucliery * TAILLE, TAILLE, TAILLE);
+            }
         }
 
         // perso
