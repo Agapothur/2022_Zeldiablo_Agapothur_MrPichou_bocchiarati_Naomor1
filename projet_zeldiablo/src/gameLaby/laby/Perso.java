@@ -57,7 +57,7 @@ public class Perso {
      * @param v vie à enlever
      */
     public void subirdegat(int v){
-        if(this.bouclier == null){
+        if(!possedeBouclier()){
             this.vie -= v;
         }
         else
@@ -139,6 +139,10 @@ public class Perso {
 
     public boolean possedeArme(){
         return arme != null;
+    }
+
+    public boolean possedeBouclier(){
+        return bouclier != null;
     }
 
     public int[][] attaqueDirectionelle(String direction) {
