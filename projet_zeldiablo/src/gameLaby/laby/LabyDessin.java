@@ -94,9 +94,22 @@ public class LabyDessin implements DessinJeu {
             double sortiex = labyrinthe.getLabyrinthe().sortie.getX();
             double sortiey = labyrinthe.getLabyrinthe().sortie.getY();
             //gc.setFill(Color.rgb(86,72,23));
-            Image img = new Image("image/doors_leaf_closed.png");
-            gc.setFill(new ImagePattern(img));
-            gc.fillRect(sortiex * TAILLE, sortiey * TAILLE, TAILLE, TAILLE);
+            if(!labyrinthe.getLabyrinthe().pj.getAmulette()) {
+                Image img2 = new Image("image/floor_ladder.png");
+                gc.setFill(new ImagePattern(img2));
+                gc.fillRect(sortiex * TAILLE, sortiey * TAILLE, TAILLE, TAILLE);
+                Image img = new Image("image/doors_leaf_closed.png");
+                gc.setFill(new ImagePattern(img));
+                gc.fillRect(sortiex * TAILLE, sortiey * TAILLE, TAILLE, TAILLE);
+
+            }else {
+                Image img2 = new Image("image/floor_ladder.png");
+                gc.setFill(new ImagePattern(img2));
+                gc.fillRect(sortiex * TAILLE, sortiey * TAILLE, TAILLE, TAILLE);
+                Image img = new Image("image/doors_leaf_open.png");
+                gc.setFill(new ImagePattern(img));
+                gc.fillRect(sortiex * TAILLE, sortiey * TAILLE, TAILLE, TAILLE);
+            }
         }
 
         //arme
