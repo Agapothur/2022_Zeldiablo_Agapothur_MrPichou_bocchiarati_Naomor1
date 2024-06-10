@@ -36,6 +36,7 @@ public class Perso {
         this.vie = 5;
         this.force = 1;
         this.attaque = "";
+        this.arme = null;
     }
 
     /**
