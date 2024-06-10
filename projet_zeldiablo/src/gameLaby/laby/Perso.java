@@ -22,7 +22,7 @@ public class Perso {
     private int vie;
     private int force;
 
-    private boolean attaque;
+    private String attaque;
     public Color couleur = Color.RED;
     /**
      * constructeur
@@ -35,6 +35,7 @@ public class Perso {
         this.y = dy;
         this.vie = 5;
         this.force = 1;
+        this.attaque = "";
     }
 
     /**
@@ -116,6 +117,13 @@ public class Perso {
     }
 
     public int[][] attaqueDirectionelle(String direction) {
+        switch (direction) {
+            case Labyrinthe.DROITE ->{this.setAttaque("droite");}
+            case Labyrinthe.GAUCHE->{this.setAttaque("gauche");}
+            case Labyrinthe.HAUT->{this.setAttaque("haut");}
+            case Labyrinthe.BAS->{this.setAttaque("bas");}
+            default -> {this.setAttaque("");}
+        };
         return switch (direction) {
             case Labyrinthe.DROITE -> new int[][]{{x + 1, y}, {x + 2, y}};
             case Labyrinthe.GAUCHE -> new int[][]{{x - 1, y}, {x - 2, y}};
@@ -142,11 +150,11 @@ public class Perso {
         this.bouclier = bouclier;
     }
 
-    public boolean getIsAttaque(){
+    public String getIsAttaque(){
         return this.attaque;
     }
 
-    public void setAttaque(boolean attaque) {
+    public void setAttaque(String attaque) {
         this.attaque = attaque;
     }
 
