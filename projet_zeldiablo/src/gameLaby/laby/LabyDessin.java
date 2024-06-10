@@ -3,8 +3,10 @@ package gameLaby.laby;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.transform.Rotate;
 import moteurJeu.DessinJeu;
 import moteurJeu.Jeu;
 
@@ -97,6 +99,17 @@ public class LabyDessin implements DessinJeu {
             gc.fillRect(sortiex * TAILLE, sortiey * TAILLE, TAILLE, TAILLE);
         }
 
+        //arme
+        if(!labyrinthe.getLabyrinthe().pj.possedeArme()) {
+            if (labyrinthe.getLabyrinthe().armes != null) {
+                double armex = labyrinthe.getLabyrinthe().armes[0].getX();
+                double armey = labyrinthe.getLabyrinthe().armes[0].getY();
+                Image img = new Image("image/weapon_red_gem_sword.png");
+                gc.setFill(new ImagePattern(img));
+                gc.fillRect(armex * TAILLE+((double) TAILLE /4), armey * TAILLE, (double) TAILLE /2, TAILLE);
+            }
+        }
+
         // perso
         double persox = labyrinthe.getLabyrinthe().pj.getX();
         double persoy = labyrinthe.getLabyrinthe().pj.getY();
@@ -121,8 +134,88 @@ public class LabyDessin implements DessinJeu {
                 gc.setFill(labyrinthe.getLabyrinthe().pj.getCouleur());
             }
         }
-
         gc.fillRect(persox * TAILLE, persoy * TAILLE, TAILLE, TAILLE);
+        System.out.println(labyrinthe.getLabyrinthe().pj.getIsAttaque());
+        if(labyrinthe.getLabyrinthe().pj.getIsAttaque()!=""){
+            if(labyrinthe.getLabyrinthe().pj.possedeArme()) {
+                switch (labyrinthe.getLabyrinthe().pj.getIsAttaque()) {
+                    case "droite" -> {
+                        Image img = new Image("image/weapon_red_gem_sword_right.png");
+                        gc.setFill(new ImagePattern(img));
+                        gc.fillRect(persox * TAILLE + TAILLE, persoy * TAILLE + ((double) TAILLE / 4), TAILLE, (double) TAILLE / 2);
+                        labyrinthe.getLabyrinthe().pj.setAttaque("");
+                    }
+
+                    case "gauche" -> {
+                        Image img = new Image("image/weapon_red_gem_sword_left.png");
+                        gc.setFill(new ImagePattern(img));
+                        gc.fillRect(persox * TAILLE - TAILLE, persoy * TAILLE + ((double) TAILLE / 4), TAILLE, (double) TAILLE / 2);
+                        labyrinthe.getLabyrinthe().pj.setAttaque("");
+                    }
+
+                    case "haut" -> {
+                        Image img = new Image("image/weapon_red_gem_sword.png");
+                        gc.setFill(new ImagePattern(img));
+                        gc.fillRect(persox * TAILLE + ((double) TAILLE / 4), persoy * TAILLE - TAILLE, (double) TAILLE / 2, TAILLE);
+                        labyrinthe.getLabyrinthe().pj.setAttaque("");
+                    }
+
+                    case "bas" -> {
+                        Image img = new Image("image/weapon_red_gem_sword_down.png");
+                        gc.setFill(new ImagePattern(img));
+                        gc.fillRect(persox * TAILLE + ((double) TAILLE / 4), persoy * TAILLE + TAILLE, (double) TAILLE / 2, TAILLE);
+                        labyrinthe.getLabyrinthe().pj.setAttaque("");
+                    }
+
+                    default -> {
+                        Image img = new Image("image/weapon_red_gem_sword.png");
+                        gc.setFill(new ImagePattern(img));
+                        gc.fillRect(persox * TAILLE, persoy * TAILLE, (double) TAILLE / 2, TAILLE);
+                        labyrinthe.getLabyrinthe().pj.setAttaque("");
+                    }
+                }
+                ;
+            }else {
+                switch (labyrinthe.getLabyrinthe().pj.getIsAttaque()) {
+                    case "droite" -> {
+                        Image img = new Image("image/weapon_rusty_sword_right.png");
+                        gc.setFill(new ImagePattern(img));
+                        gc.fillRect(persox * TAILLE + TAILLE, persoy * TAILLE + ((double) TAILLE / 4), TAILLE, (double) TAILLE / 2);
+                        labyrinthe.getLabyrinthe().pj.setAttaque("");
+                    }
+
+                    case "gauche" -> {
+                        Image img = new Image("image/weapon_rusty_sword_left.png");
+                        gc.setFill(new ImagePattern(img));
+                        gc.fillRect(persox * TAILLE - TAILLE, persoy * TAILLE + ((double) TAILLE / 4), TAILLE, (double) TAILLE / 2);
+                        labyrinthe.getLabyrinthe().pj.setAttaque("");
+                    }
+
+                    case "haut" -> {
+                        Image img = new Image("image/weapon_rusty_sword.png");
+                        gc.setFill(new ImagePattern(img));
+                        gc.fillRect(persox * TAILLE + ((double) TAILLE / 4), persoy * TAILLE - TAILLE, (double) TAILLE / 2, TAILLE);
+                        labyrinthe.getLabyrinthe().pj.setAttaque("");
+                    }
+
+                    case "bas" -> {
+                        Image img = new Image("image/weapon_rusty_sword_down.png");
+                        gc.setFill(new ImagePattern(img));
+                        gc.fillRect(persox * TAILLE + ((double) TAILLE / 4), persoy * TAILLE + TAILLE, (double) TAILLE / 2, TAILLE);
+                        labyrinthe.getLabyrinthe().pj.setAttaque("");
+                    }
+
+                    default -> {
+                        Image img = new Image("image/weapon_red_gem_sword.png");
+                        gc.setFill(new ImagePattern(img));
+                        gc.fillRect(persox * TAILLE, persoy * TAILLE, (double) TAILLE / 2, TAILLE);
+                        labyrinthe.getLabyrinthe().pj.setAttaque("");
+                    }
+                }
+                ;
+            }
+
+        }
         // monstre
         for(Monstre m : labyrinthe.getLabyrinthe().monstres){
             if (m != null) {
