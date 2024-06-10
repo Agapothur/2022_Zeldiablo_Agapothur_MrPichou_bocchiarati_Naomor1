@@ -73,8 +73,12 @@ public class LabyJeu implements Jeu {
         }
         for(int i = 0; i<labyrinthes[current].armes.length; i++) {
             if(labyrinthes[current].armes[i] != null) {
-                if (Arrays.equals(labyrinthes[current].armes[0].getPos(), labyrinthes[current].pj.getPos()))
-                    labyrinthes[current].pj.setArme(labyrinthes[current].armes[0]);
+                if (Arrays.equals(labyrinthes[current].armes[i].getPos(), labyrinthes[current].pj.getPos()))
+                    labyrinthes[current].pj.setArme(labyrinthes[current].armes[i]);
+            }
+            if(labyrinthes[current].boucliers[i] != null) {
+                if (Arrays.equals(labyrinthes[current].boucliers[i].getPos(), labyrinthes[current].pj.getPos()))
+                    labyrinthes[current].pj.setBouclier(labyrinthes[current].boucliers[i]);
             }
         }
     }

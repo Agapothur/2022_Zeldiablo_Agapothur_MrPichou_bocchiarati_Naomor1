@@ -3,6 +3,9 @@ package gameLaby.laby;
 
 import javafx.scene.paint.Color;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * gere un personnage situe en x,y
  */
@@ -21,6 +24,8 @@ public class Perso {
 
     private int vie;
     private int force;
+
+    ArrayList<Items> inventaire = new ArrayList<>();
 
     private boolean attaque;
     public Color couleur = Color.RED;
@@ -50,9 +55,27 @@ public class Perso {
      * @param v vie à enlever
      */
     public void subirdegat(int v){
-        this.vie-=v;
+        if(this.bouclier == null){
+            this.vie -= v;
+        }
+        else
+            this.vie -= redirigerDegats(v);
     }
 
+    public int redirigerDegats(int v){
+        int rest = 0;
+        if(bouclier.pv - v <= 0) {
+            rest = v - bouclier.pv;
+            casserBouclier();
+        }
+        bouclier.pv -= v;
+        casserBouclier();
+        return rest;
+    }
+
+    public void casserBouclier(){
+        bouclier = null;
+    }
     /**
      * permet de savoir si le personnage est en x,y
      *
@@ -76,6 +99,7 @@ public class Perso {
         // getter
         return this.x;
     }
+
 
     /**
      * @return position y du personnage
