@@ -6,17 +6,21 @@ import moteurJeu.Jeu;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * Classe qui permet de faire fonctionner le jeu dans le labyrinthe
  */
 public class LabyJeu implements Jeu {
-    private Labyrinthe[] labyrinthes;
+    private final Labyrinthe[] labyrinthes;
     private String[] noms;
     int current;
     public String last;
 
     Save saves;
+    Labyrinthe laby;
+
+    int kills;
 
     /**
      * Constructeur de la classe LabyJeu.
@@ -32,56 +36,86 @@ public class LabyJeu implements Jeu {
         }
         this.current = 0;
         this.saves = new Save();
+        kills = 0;
     }
 
     @Override
     public void update(double deltaTime, Clavier clavier) throws IOException {
+        laby = labyrinthes[current];
         if (clavier.haut) {
-            this.labyrinthes[current].deplacerPerso(Labyrinthe.HAUT);
-            this.labyrinthes[current].pj.setCouleur(Color.RED);
+            laby.deplacerPerso(Labyrinthe.HAUT);
+            laby.pj.setCouleur(Color.RED);
             last = Labyrinthe.HAUT;
         }
         if (clavier.bas) {
-            this.labyrinthes[current].deplacerPerso(Labyrinthe.BAS);
-            this.labyrinthes[current].pj.setCouleur(Color.RED);
+            laby.deplacerPerso(Labyrinthe.BAS);
+            laby.pj.setCouleur(Color.RED);
             last = Labyrinthe.BAS;
         }
         if (clavier.gauche) {
-            this.labyrinthes[current].deplacerPerso(Labyrinthe.GAUCHE);
-            this.labyrinthes[current].pj.setCouleur(Color.RED);
+            laby.deplacerPerso(Labyrinthe.GAUCHE);
+            laby.pj.setCouleur(Color.RED);
             last = Labyrinthe.GAUCHE;
         }
         if (clavier.droite) {
-            this.labyrinthes[current].deplacerPerso(Labyrinthe.DROITE);
-            this.labyrinthes[current].pj.setCouleur(Color.RED);
+            laby.deplacerPerso(Labyrinthe.DROITE);
+            laby.pj.setCouleur(Color.RED);
             last = Labyrinthe.DROITE;
         }
         if (clavier.space) {
-            int[][] directions = labyrinthes[current].pj.attaqueDirectionelle(last);
-            this.labyrinthes[current].pj.setCouleur(Color.ORANGE);
+            int[][] directions = laby.pj.attaqueDirectionelle(last);
+            laby.pj.setCouleur(Color.ORANGE);
             for(Monstre m : getLabyrinthe().monstres){
-                labyrinthes[current].monstreEstSurCase(m, directions[0], labyrinthes[current].pj.getForce());
-                if (!labyrinthes[current].getMur(directions[0][0], directions[0][1]))
-                    labyrinthes[current].monstreEstSurCase(m, directions[1], labyrinthes[current].pj.getForce());
+                laby.monstreEstSurCase(m, directions[0], laby.pj.getForce());
+                if (!laby.getMur(directions[0][0], directions[0][1]))
+                    laby.monstreEstSurCase(m, directions[1], laby.pj.getForce());
             }
         }
         setLabyrinthe();
+        debloqueAmulette();
+
         for(Monstre m : getLabyrinthe().monstres){
             if (m.getPv() <= 0) {
-                labyrinthes[current].nePlusAfficherMonstre(m);
+                laby.nePlusAfficherMonstre(m);
+                if(current == 10) kills += 1;
             }
         }
-        for(int i = 0; i<labyrinthes[current].armes.length; i++) {
-            if(labyrinthes[current].armes[i] != null) {
-                if (Arrays.equals(labyrinthes[current].armes[i].getPos(), labyrinthes[current].pj.getPos()))
-                    labyrinthes[current].pj.setArme(labyrinthes[current].armes[i]);
+        for(int i = 0; i<laby.armes.size(); i++) {
+            if(laby.armes.get(i) != null) {
+                if (Arrays.equals(laby.armes.get(i).getPos(), laby.pj.getPos()))
+                    laby.pj.setArme(laby.armes.get(i));
             }
-            if(labyrinthes[current].boucliers[i] != null) {
-                if (Arrays.equals(labyrinthes[current].boucliers[i].getPos(), labyrinthes[current].pj.getPos())) {
-                    labyrinthes[current].pj.setBouclier(labyrinthes[current].boucliers[i]);
-                    //envois de l'amulette dans les abisses
-                    labyrinthes[current].boucliers[i].x = 999;
-                    labyrinthes[current].boucliers[i].y = 999;
+        }
+        int remove = -1;
+        for(int i = 0; i<laby.boucliers.size(); i++){
+            if(laby.boucliers.get(i) != null){
+                if(Arrays.equals(laby.boucliers.get(i).getPos(), laby.pj.getPos())){
+                    laby.pj.setBouclier(laby.boucliers.get(i));
+                    remove = i;
+                    //laby.boucliers.get(i).setPos(999,999);
+                }
+            }
+        }
+        if(remove != -1){
+            laby.boucliers.remove(remove);
+        }
+
+        if(current == 9){
+            System.out.println(laby.boucliers.size());
+        }
+        Random rand = new Random();
+        for(Monstre m : laby.monstres) {
+            int ceDeplace = rand.nextInt(3);
+            if(ceDeplace == 1){
+                int typeDeplacement = rand.nextInt(6);
+                switch (typeDeplacement) {
+
+                    case 1, 0, 3, 4 -> {
+                        laby.deplacerMonstreAttire(m);
+                    }
+                    case 2 -> {
+                        laby.deplacerMonstreAleatoire(m, Labyrinthe.ACTIONS[rand.nextInt(4)]);
+                    }
                 }
             }
         }
@@ -94,7 +128,7 @@ public class LabyJeu implements Jeu {
 
     @Override
     public boolean etreFini() {
-        return this.labyrinthes[current].etreFini();
+        return this.laby.etreFini();
     }
 
     /**
@@ -104,21 +138,30 @@ public class LabyJeu implements Jeu {
         return this.labyrinthes[current];
     }
 
+
+    public void debloqueAmulette(){
+        if(kills == 7){
+            labyrinthes[10].murs[18][4] = false;
+            labyrinthes[10].murs[17][4] = false;
+            labyrinthes[10].murs[16][4] = false;
+        }
+    }
     public void setLabyrinthe() throws IOException {
+        saves.save(laby);
         int currentE = -1;
-        for(int i = 0; i<labyrinthes[current].echelles.length; i++){
-            if(labyrinthes[current].echelles[i] != null){
-                if (Arrays.equals(labyrinthes[current].pj.getPos(), labyrinthes[current].echelles[i].getPos()))
+        for(int i = 0; i<laby.echelles.length; i++){
+            if(laby.echelles[i] != null){
+                if (Arrays.equals(laby.pj.getPos(), laby.echelles[i].getPos()))
                     currentE = i;
             }
         }
         if(currentE != -1) {
-            saves.save(labyrinthes[current]);
+
             switch(last){
-                case Labyrinthe.DROITE -> labyrinthes[current].pj.x -= 1;
-                case Labyrinthe.GAUCHE -> labyrinthes[current].pj.x += 1;
-                case Labyrinthe.HAUT -> labyrinthes[current].pj.y += 1;
-                case Labyrinthe.BAS -> labyrinthes[current].pj.y -= 1;
+                case Labyrinthe.DROITE -> laby.pj.x -= 1;
+                case Labyrinthe.GAUCHE -> laby.pj.x += 1;
+                case Labyrinthe.HAUT -> laby.pj.y += 1;
+                case Labyrinthe.BAS -> laby.pj.y -= 1;
             }
 
             switch (current) {
@@ -210,10 +253,11 @@ public class LabyJeu implements Jeu {
                         current = 5;
                     }
                     break;
-
             }
-            saves.restaure(labyrinthes[current]);
+            laby = labyrinthes[current];
+            saves.restaure(laby);
         }
+
     }
 
 }

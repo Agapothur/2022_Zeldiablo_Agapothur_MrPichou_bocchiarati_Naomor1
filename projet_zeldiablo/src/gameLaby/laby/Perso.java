@@ -153,14 +153,37 @@ public class Perso {
             case Labyrinthe.BAS->{this.setAttaque("bas");}
             default -> {this.setAttaque("");}
         };
-        return switch (direction) {
-            case Labyrinthe.DROITE -> new int[][]{{x + 1, y}, {x + 2, y}};
-            case Labyrinthe.GAUCHE -> new int[][]{{x - 1, y}, {x - 2, y}};
-            case Labyrinthe.HAUT -> new int[][]{{x, y - 1}, {x, y - 2}};
-            case Labyrinthe.BAS -> new int[][]{{x, y + 1}, {x, y + 2}};
-            default -> new int[][]{{0, 0}, {0, 0}};
-        };
-
+        switch (direction) {
+            case Labyrinthe.DROITE:
+                if (!(x + 1 > 19)) {
+                    if (x + 2 > 19)
+                        return new int[][]{{x + 1, y}, {x + 1, y}};
+                    return new int[][]{{x + 1, y}, {x + 2, y}};
+                }
+                break;
+            case Labyrinthe.GAUCHE:
+                if (!(x - 1 < 0)) {
+                    if (x - 2 < 0)
+                        return new int[][]{{x - 1, y}, {x - 1, y}};
+                    return new int[][]{{x - 1, y}, {x - 2, y}};
+                }
+                break;
+            case Labyrinthe.HAUT:
+                if (!(y - 1 < 0)) {
+                    if (y - 2 < 0)
+                        return new int[][]{{x, y - 1}, {x, y - 1}};
+                    return new int[][]{{x, y - 1}, {x, y - 2}};
+                }
+                break;
+            case Labyrinthe.BAS:
+                if (!(y + 1 > 13)) {
+                    if (y + 2 > 13)
+                        return new int[][]{{x, y + 1}, {x, y + 1}};
+                    return new int[][]{{x, y + 1}, {x, y + 2}};
+                }
+                break;
+        }
+        return new int[][]{{0, 0}, {0, 0}};
     }
 
     public void setVie(int pv) {

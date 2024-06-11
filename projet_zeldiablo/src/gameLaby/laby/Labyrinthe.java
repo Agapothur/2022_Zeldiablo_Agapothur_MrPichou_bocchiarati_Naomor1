@@ -6,6 +6,8 @@ import javafx.scene.paint.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -41,8 +43,8 @@ Labyrinthe {
     public Amulette amulette;
     public Sortie sortie;
     public Echelle[] echelles;
-    public Arme[] armes;
-    public Bouclier[] boucliers;
+    public ArrayList<Arme> armes;
+    public ArrayList<Bouclier> boucliers;
 
     /**
      * les murs du labyrinthe
@@ -110,10 +112,8 @@ Labyrinthe {
         this.random = new Random();
         this.sortie = null;
         this.echelles = new Echelle[4];
-        this.armes =  new Arme[5];
-        this.boucliers = new Bouclier[5];
-        int numBouclier = 0;
-        int numArme = 0;
+        this.armes = new ArrayList<>();
+        this.boucliers = new ArrayList<>();
         this.monstres = new Monstre[0];
 
         // lecture des cases
@@ -161,31 +161,29 @@ Labyrinthe {
                         this.sortie = new Sortie(colonne, numeroLigne);
                         this.sortiepresente = true;
                         break;
-                    case ECHELLE1 :
+                    case ECHELLE1:
                         this.murs[colonne][numeroLigne] = false;
                         this.echelles[0] = new Echelle(colonne, numeroLigne);
                         break;
-                    case ECHELLE2 :
+                    case ECHELLE2:
                         this.murs[colonne][numeroLigne] = false;
                         this.echelles[1] = new Echelle(colonne, numeroLigne);
                         break;
-                    case ECHELLE3 :
+                    case ECHELLE3:
                         this.murs[colonne][numeroLigne] = false;
                         this.echelles[2] = new Echelle(colonne, numeroLigne);
                         break;
-                    case ECHELLE4 :
+                    case ECHELLE4:
                         this.murs[colonne][numeroLigne] = false;
                         this.echelles[3] = new Echelle(colonne, numeroLigne);
                         break;
                     case ARME :
                         this.murs[colonne][numeroLigne]=false;
-                        this.armes[numArme] = new Arme(colonne, numeroLigne);
-                        numArme+=1;
-
+                        this.armes.add(new Arme(colonne, numeroLigne));
+                        break;
                     case BOUCLIER:
                         this.murs[colonne][numeroLigne]=false;
-                        this.boucliers[numBouclier] = new Bouclier(colonne, numeroLigne);
-                        numBouclier+=1;
+                        this.boucliers.add(new Bouclier(colonne, numeroLigne));
                         break;
                     default:
                         throw new Error("caractere inconnu " + c);
@@ -197,6 +195,7 @@ Labyrinthe {
             numeroLigne++;
         }
 
+        ;
         // ferme fichier
         bfRead.close();
 
@@ -238,7 +237,8 @@ Labyrinthe {
         if(this.amulettepresente) {
             if (this.amulette.x == suivante[0] && this.amulette.y == suivante[1]) {
                 this.pj.setAmulette(true);
-                this.murs[this.sortie.x][this.sortie.y] = false;
+                if(this.sortie != null)
+                    this.murs[this.sortie.x][this.sortie.y] = false;
                 //envois de l'amulette dans les abisses
                 this.amulette.x = 999;
                 this.amulette.y = 999;
@@ -254,20 +254,7 @@ Labyrinthe {
         }
 //        String actions = ACTIONS[random.nextInt(ACTIONS.length)];
 //        deplacerMonstreAleatoire(actions);
-        for(Monstre m : monstres) {
-            Random rand = new Random();
-            int nb = rand.nextInt(5);
-            switch (nb){
 
-                case 1,0,3 ->{
-                    deplacerMonstreAttire(m);
-                }
-                case 2 ->{
-                    deplacerMonstreAleatoire(m,ACTIONS[rand.nextInt(4)]);
-                }
-            }
-
-        }
     }
     /**
      * deplace le monstre en fonction de l'action.
@@ -295,10 +282,11 @@ Labyrinthe {
                     }
                 }
             }
-
-            if (!this.murs[suivante[0]][suivante[1]] && (this.pj.x != suivante[0] || this.pj.y != suivante[1]) && !attaque) {
-                m.x = suivante[0];
-                m.y = suivante[1];
+            if(!(suivante[0] < 0 || suivante[0] > 19 || suivante[1] < 0 || suivante[1] > 13 )) {
+                if (!(this.murs[suivante[0]][suivante[1]]) && (this.pj.x != suivante[0] || this.pj.y != suivante[1]) && !attaque) {
+                    m.x = suivante[0];
+                    m.y = suivante[1];
+                }
             }
         }
     }
@@ -351,9 +339,12 @@ Labyrinthe {
                         }
                     }
                 }
-                if (!this.murs[suivante[0]][suivante[1]] && (this.pj.x != suivante[0] || this.pj.y != suivante[1]) && !attaque) {
-                    m.x = suivante[0];
-                    m.y = suivante[1];
+
+                if(!(suivante[0] < 0 || suivante[0] > 19 || suivante[1] < 0 || suivante[1] > 13 )) {
+                    if (!this.murs[suivante[0]][suivante[1]] && (this.pj.x != suivante[0] || this.pj.y != suivante[1]) && !attaque) {
+                        m.x = suivante[0];
+                        m.y = suivante[1];
+                    }
                 }
             }
         }
