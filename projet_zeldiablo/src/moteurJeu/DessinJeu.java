@@ -1,5 +1,6 @@
 package moteurJeu;
 
+import gameLaby.laby.SpriteLoader;
 import javafx.scene.canvas.Canvas;
 
 
@@ -14,6 +15,6 @@ public interface DessinJeu {
      * @param jeu jeu a afficher
      * @param canvas canvas dans lequel dessiner l'etat du jeu
      */
-    void dessinerJeu(Jeu jeu, Canvas canvas);
+    void dessinerJeu(Jeu jeu, Canvas canvas, SpriteLoader loader);
 
 }

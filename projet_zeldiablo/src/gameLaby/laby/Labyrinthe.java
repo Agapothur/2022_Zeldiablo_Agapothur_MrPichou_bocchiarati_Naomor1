@@ -1,5 +1,6 @@
 package gameLaby.laby;
 
+import javafx.event.ActionEvent;
 import javafx.scene.paint.Color;
 
 import java.io.BufferedReader;
@@ -254,7 +255,18 @@ Labyrinthe {
 //        String actions = ACTIONS[random.nextInt(ACTIONS.length)];
 //        deplacerMonstreAleatoire(actions);
         for(Monstre m : monstres) {
-            deplacerMonstreAttire(m);
+            Random rand = new Random();
+            int nb = rand.nextInt(5);
+            switch (nb){
+
+                case 1,0,3 ->{
+                    deplacerMonstreAttire(m);
+                }
+                case 2 ->{
+                    deplacerMonstreAleatoire(m,ACTIONS[rand.nextInt(4)]);
+                }
+            }
+
         }
     }
     /**
@@ -274,7 +286,6 @@ Labyrinthe {
                 for (int j = -1; j < 2; j++) {
                     if (m.x - j == this.pj.x && m.y - i == this.pj.y) {
                         this.pj.subirdegat(1);
-                        System.out.println(this.pj.getVie());
                         m.setCouleur(Color.RED);
                         attaque = true;
                         if (this.pj.getVie() == 0) {
@@ -333,10 +344,6 @@ Labyrinthe {
                 for (int j = -1; j < 2; j++) {
                     if (m.x - j == this.pj.x && m.y - i == this.pj.y) {
                         this.pj.subirdegat(1);
-                        if(pj.possedeBouclier()) {
-                            System.out.println("Bouclier : " + this.pj.getBouclier().pv);
-                        }
-                        System.out.println("perso : " + this.pj.getVie());
                         m.setCouleur(Color.RED);
                         attaque = true;
                         if (this.pj.getVie() == 0) {
