@@ -85,7 +85,6 @@ public class LabyJeu implements Jeu {
                 }
             }
         }
-        System.out.println(this.labyrinthes[current].pj.possedeBouclier());
     }
 
     @Override
@@ -106,46 +105,113 @@ public class LabyJeu implements Jeu {
     }
 
     public void setLabyrinthe() throws IOException {
-        if((noms[current] == noms[0])&& Arrays.equals(labyrinthes[current].pj.getPos(), labyrinthes[current].echelles[0].getPos())){
-            labyrinthes[current].pj.y -= 1;
-            saves.save(labyrinthes[current]);
-            current = 1;
-            saves.restaure(labyrinthes[current]);
+        int currentE = -1;
+        for(int i = 0; i<labyrinthes[current].echelles.length; i++){
+            if(labyrinthes[current].echelles[i] != null){
+                if (Arrays.equals(labyrinthes[current].pj.getPos(), labyrinthes[current].echelles[i].getPos()))
+                    currentE = i;
+            }
         }
-
-        if(noms[current] == noms[1] && labyrinthes[current].pj.getX() == 15  && labyrinthes[current].pj.getY() == 13){
-            labyrinthes[current].pj.y -= 1;
+        if(currentE != -1) {
             saves.save(labyrinthes[current]);
-            current = 0;
-            saves.restaure(labyrinthes[current]);
+            switch(last){
+                case Labyrinthe.DROITE -> labyrinthes[current].pj.x -= 1;
+                case Labyrinthe.GAUCHE -> labyrinthes[current].pj.x += 1;
+                case Labyrinthe.HAUT -> labyrinthes[current].pj.y += 1;
+                case Labyrinthe.BAS -> labyrinthes[current].pj.y -= 1;
+            }
 
-        }
+            switch (current) {
+                case 0:
+                    if (currentE == 0) {
+                        current = 1;
+                    }
+                    break;
+                case 1:
+                    switch (currentE) {
+                        case 0:
+                            current = 0;
+                            break;
+                        case 1 :
+                            current = 2;
+                    }
+                    break;
+                case 2:
+                    switch (currentE) {
+                        case 0:
+                            current = 1;
+                            break;
+                        case 1 :
+                            current = 3;
 
-        if(noms[current] == noms[1] && labyrinthes[current].pj.getX() == 0  && labyrinthes[current].pj.getY() == 2){
-            labyrinthes[current].pj.x += 1;
-            saves.save(labyrinthes[current]);
-            current = 2;
-            saves.restaure(labyrinthes[current]);
-        }
+                    }
+                    break;
+                case 3:
+                    switch (currentE) {
+                        case 0:
+                            current = 2;
+                            break;
+                        case 1 :
+                            current = 4;
+                            break;
+                        case 2:
+                            current = 5;
+                            break;
+                        case 3:
+                            current = 6;
 
-        if(noms[current] == noms[2] && labyrinthes[current].pj.getX() == 0  && labyrinthes[current].pj.getY() == 2){
-            labyrinthes[current].pj.x += 1;
-            saves.save(labyrinthes[current]);
-            current = 1;
-            saves.restaure(labyrinthes[current]);
-        }
+                    }
+                    break;
+                case 4:
+                    switch (currentE) {
+                        case 0:
+                            current = 3;
+                            break;
+                        case 1 :
+                            current = 8;
+                            break;
+                        case 2:
+                            current = 7;
+                            break;
+                    }
+                    break;
+                case 5:
+                    switch (currentE) {
+                        case 0:
+                            current = 3;
+                            break;
+                        case 1 :
+                            current = 10;
+                            break;
+                    }
+                    break;
+                case 6:
+                    switch (currentE) {
+                        case 0:
+                            current = 3;
+                            break;
+                        case 1 :
+                            current = 9;
+                            break;
+                    }
+                    break;
+                case 7, 8:
+                    if (currentE == 0) {
+                        current = 4;
+                    }
+                    break;
+                case 9:
+                    if (currentE == 0) {
+                        current = 6;
+                    }
+                    break;
+                case 10:
+                    if (currentE == 0) {
+                        current = 5;
+                    }
+                    break;
 
-        if(noms[current] == noms[2] && labyrinthes[current].pj.getX() == 19  && labyrinthes[current].pj.getY() == 2){
-            labyrinthes[current].pj.x -= 1;
-            saves.save(labyrinthes[current]);
-            current = 3;
-            saves.restaure(labyrinthes[current]);
-        }
-
-        if(noms[current] == noms[3] && labyrinthes[current].pj.getX() == 0  && labyrinthes[current].pj.getY() == 2){
-            labyrinthes[current].pj.x += 1;
-            saves.save(labyrinthes[current]);
-            current = 2;
+            }
             saves.restaure(labyrinthes[current]);
         }
     }

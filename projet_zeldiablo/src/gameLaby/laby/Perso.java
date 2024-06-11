@@ -38,7 +38,7 @@ public class Perso {
     public Perso(int dx, int dy) {
         this.x = dx;
         this.y = dy;
-        this.vie = 6;
+        this.vie = 25;
         this.force = 1;
         this.attaque = "";
         this.arme = null;

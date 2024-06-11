@@ -9,9 +9,9 @@ public class MainLaby {
         MoteurJeu.setFPS(14);
 
         try {
-            String[] noms = new String[4];
+            String[] noms = new String[11];
             for(int i = 0; i<noms.length; i++){
-                noms[i] = "projet_zeldiablo/labySimple/e0" + i + ".txt";
+                noms[i] = "projet_zeldiablo/labySimple/e" + i + ".txt";
             }
             LabyJeu jeu = new LabyJeu(noms);
 
