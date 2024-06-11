@@ -1,8 +1,8 @@
 14
 20
 XXXXXXXXXXXXXXX1XXXX
-XXXXXXXXX....X..X..X
-2.......X.X..XX.X..X
+XXXXXXXXX....X.PX..X
+X.......X.X..XX.X..X
 XXXXXXX.X.......X..X
 X..XXXX.X......XX..X
 XX......X.X..X.....X
@@ -10,7 +10,7 @@ X..XXXXXXMXMXX.....X
 X............X...XXX
 X.........X....X...X
 XXXXX...X......X...X
-X...X.XXX....X...XMX
+2...X.XXX....X...XMX
 XMX...X...X......X.X
-X.....X.X......P.X.X
+X.....X.X........X.X
 XXXXXXXXXXXXXXXXXXXX
