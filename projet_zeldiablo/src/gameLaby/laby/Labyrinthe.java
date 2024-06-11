@@ -333,7 +333,10 @@ Labyrinthe {
                 for (int j = -1; j < 2; j++) {
                     if (m.x - j == this.pj.x && m.y - i == this.pj.y) {
                         this.pj.subirdegat(1);
-                        System.out.println(this.pj.getVie());
+                        if(pj.possedeBouclier()) {
+                            System.out.println("Bouclier : " + this.pj.getBouclier().pv);
+                        }
+                        System.out.println("perso : " + this.pj.getVie());
                         m.setCouleur(Color.RED);
                         attaque = true;
                         if (this.pj.getVie() == 0) {
