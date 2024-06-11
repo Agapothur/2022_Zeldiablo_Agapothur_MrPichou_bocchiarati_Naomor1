@@ -11,6 +11,6 @@ X..................X
 X...M.............P1
 X..................X
 X....X.X.X.X.X.....X
-X....XMXMXMXMX.....X
+X....XMX.X.XMX.....X
 X....X.X.X.X.X.....X
 X3XXXXXXXXXXXXXXXXXX
