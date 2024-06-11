@@ -112,9 +112,9 @@ public class LabyDessin implements DessinJeu {
 
         //arme
         if(!labyrinthe.getLabyrinthe().pj.possedeArme()) {
-            if (labyrinthe.getLabyrinthe().armes[0] != null) {
-                double armex = labyrinthe.getLabyrinthe().armes[0].getX();
-                double armey = labyrinthe.getLabyrinthe().armes[0].getY();
+            if (!labyrinthe.getLabyrinthe().armes.isEmpty()) {
+                double armex = labyrinthe.getLabyrinthe().armes.get(0).getX();
+                double armey = labyrinthe.getLabyrinthe().armes.get(0).getY();
                 gc.setFill(loader.getImage("weapon_red_gem_sword.png"));
                 gc.fillRect(armex * TAILLE+((double) TAILLE /4), armey * TAILLE, (double) TAILLE /2, TAILLE);
             }
@@ -132,9 +132,9 @@ public class LabyDessin implements DessinJeu {
             gc.fillRect((18 * TAILLE) + ((double) TAILLE / 4), (double) TAILLE / 4, (double) TAILLE /2, (double) TAILLE /2);
         }
         if(!labyrinthe.getLabyrinthe().pj.possedeBouclier()) {
-            if (labyrinthe.getLabyrinthe().boucliers[0] != null) {
-                double bouclierx = labyrinthe.getLabyrinthe().boucliers[0].getX();
-                double boucliery = labyrinthe.getLabyrinthe().boucliers[0].getY();
+            if (!labyrinthe.getLabyrinthe().boucliers.isEmpty()) {
+                double bouclierx = labyrinthe.getLabyrinthe().boucliers.get(0).getX();
+                double boucliery = labyrinthe.getLabyrinthe().boucliers.get(0).getY();
                 gc.setFill(loader.getImage("shield.png"));
                 gc.fillRect(bouclierx * TAILLE, boucliery * TAILLE, TAILLE, TAILLE);
             }
@@ -143,8 +143,8 @@ public class LabyDessin implements DessinJeu {
         // perso
         double persox = labyrinthe.getLabyrinthe().pj.getX();
         double persoy = labyrinthe.getLabyrinthe().pj.getY();
-        switch (labyrinthe.getLabyrinthe().pj.getIsAttaque()) {
-            case "gauche" -> {switch (nbframe) {
+        if (labyrinthe.getLabyrinthe().pj.getIsAttaque().equals("gauche")) {
+            switch (nbframe) {
                 case 0 -> {
                     gc.setFill(loader.getImage("knight_m_idle_anim_f0_left.png"));
                 }
@@ -160,24 +160,23 @@ public class LabyDessin implements DessinJeu {
                 default -> {
                     gc.setFill(labyrinthe.getLabyrinthe().pj.getCouleur());
                 }
-            }}
-            default -> {
-                switch (nbframe) {
-                    case 0 -> {
-                        gc.setFill(loader.getImage("knight_m_idle_anim_f0.png"));
-                    }
-                    case 1 -> {
-                        gc.setFill(loader.getImage("knight_m_idle_anim_f1.png"));
-                    }
-                    case 2 -> {
-                        gc.setFill(loader.getImage("knight_m_idle_anim_f2.png"));
-                    }
-                    case 3 -> {
-                        gc.setFill(loader.getImage("knight_m_idle_anim_f3.png"));
-                    }
-                    default -> {
-                        gc.setFill(labyrinthe.getLabyrinthe().pj.getCouleur());
-                    }
+            }
+        } else {
+            switch (nbframe) {
+                case 0 -> {
+                    gc.setFill(loader.getImage("knight_m_idle_anim_f0.png"));
+                }
+                case 1 -> {
+                    gc.setFill(loader.getImage("knight_m_idle_anim_f1.png"));
+                }
+                case 2 -> {
+                    gc.setFill(loader.getImage("knight_m_idle_anim_f2.png"));
+                }
+                case 3 -> {
+                    gc.setFill(loader.getImage("knight_m_idle_anim_f3.png"));
+                }
+                default -> {
+                    gc.setFill(labyrinthe.getLabyrinthe().pj.getCouleur());
                 }
             }
         }

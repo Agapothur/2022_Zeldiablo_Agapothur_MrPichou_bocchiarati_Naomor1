@@ -6,7 +6,6 @@ public class MainLaby {
 
     public static void main(String[] args) {
 
-
         MoteurJeu.setFPS(10);
 
 

@@ -20,4 +20,9 @@ public class Bouclier extends Items{
     public int[] getPos() {
         return new int[]{x, y};
     }
+
+    public void setPos(int newX, int newY){
+        x = newX;
+        y = newY;
+    }
 }
