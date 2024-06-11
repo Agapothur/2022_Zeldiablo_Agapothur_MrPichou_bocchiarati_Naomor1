@@ -11,6 +11,6 @@ X............X...XXX
 X.........X....X...X
 XXXXX...X......X...X
 2...X.XXX....X...XMX
-XMX...X...X......X.X
+X.X...X...X......X.X
 X.....X.X........X.X
 XXXXXXXXXXXXXXXXXXXX

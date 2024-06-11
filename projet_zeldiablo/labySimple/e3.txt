@@ -11,6 +11,6 @@ X..X..XX..........XX
 2..X..XX..........XX
 X..X..XX..........P1
 X..X..XXXXXX..XXXX.X
-X.....X.M..X.....X.X
+X.....X....X.....X.X
 X.....X............X
 XXXXXXXXX3XXXXXXXXXX
