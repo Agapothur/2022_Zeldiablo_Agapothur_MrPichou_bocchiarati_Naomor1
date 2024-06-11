@@ -23,7 +23,10 @@ public class LabyDessin implements DessinJeu {
     private boolean first = true;
     private final ImagePattern[] ip2 = new ImagePattern[255];
 
+
+
     private int nbframe = 0;
+
 
     /**
      *
@@ -31,7 +34,8 @@ public class LabyDessin implements DessinJeu {
      * @param canvas canvas représentant l'état du jeu
      */
     @Override
-    public void dessinerJeu(Jeu jeu, Canvas canvas) {
+    public void dessinerJeu(Jeu jeu, Canvas canvas, SpriteLoader loader) {
+
         this.c = canvas;
         LabyJeu labyrinthe = (LabyJeu) jeu;
 
@@ -81,9 +85,7 @@ public class LabyDessin implements DessinJeu {
         for (int j = 0; j < laby.getLength(); j++) {
             for (int i = 0; i < laby.getLengthY(); i++) {
                 if (laby.getMur(j, i)) {
-
-                    Image img = new Image("image/wall_right.png");
-                    gc.setFill(new ImagePattern(img));
+                    gc.setFill(loader.getImage("wall_right.png"));
                     gc.fillRect(j * TAILLE, i * TAILLE, TAILLE, TAILLE);
                 }
             }
@@ -95,19 +97,15 @@ public class LabyDessin implements DessinJeu {
             double sortiey = labyrinthe.getLabyrinthe().sortie.getY();
             //gc.setFill(Color.rgb(86,72,23));
             if(!labyrinthe.getLabyrinthe().pj.getAmulette()) {
-                Image img2 = new Image("image/floor_ladder.png");
-                gc.setFill(new ImagePattern(img2));
+                gc.setFill(loader.getImage("floor_ladder.png"));
                 gc.fillRect(sortiex * TAILLE, sortiey * TAILLE, TAILLE, TAILLE);
-                Image img = new Image("image/doors_leaf_closed.png");
-                gc.setFill(new ImagePattern(img));
+                gc.setFill(loader.getImage("doors_leaf_closed.png"));
                 gc.fillRect(sortiex * TAILLE, sortiey * TAILLE+TAILLE, TAILLE, TAILLE);
 
             }else {
-                Image img2 = new Image("image/floor_ladder.png");
-                gc.setFill(new ImagePattern(img2));
+                gc.setFill(loader.getImage("floor_ladder.png"));
                 gc.fillRect(sortiex * TAILLE, sortiey * TAILLE, TAILLE, TAILLE);
-                Image img = new Image("image/doors_leaf_open.png");
-                gc.setFill(new ImagePattern(img));
+                gc.setFill(loader.getImage("doors_leaf_open.png"));
                 gc.fillRect(sortiex * TAILLE, sortiey * TAILLE+TAILLE, TAILLE, TAILLE);
             }
         }
@@ -117,31 +115,27 @@ public class LabyDessin implements DessinJeu {
             if (labyrinthe.getLabyrinthe().armes[0] != null) {
                 double armex = labyrinthe.getLabyrinthe().armes[0].getX();
                 double armey = labyrinthe.getLabyrinthe().armes[0].getY();
-                Image img = new Image("image/weapon_red_gem_sword.png");
-                gc.setFill(new ImagePattern(img));
+                gc.setFill(loader.getImage("weapon_red_gem_sword.png"));
                 gc.fillRect(armex * TAILLE+((double) TAILLE /4), armey * TAILLE, (double) TAILLE /2, TAILLE);
             }
         }
 
         //vie
         for(int i = 0; i<labyrinthe.getLabyrinthe().pj.getVie();i++){
-            Image img = new Image("image/ui_heart_full.png");
-            gc.setFill(new ImagePattern(img));
+            gc.setFill(loader.getImage("ui_heart_full.png"));
             gc.fillRect((i * TAILLE) + ((double) TAILLE / 4), (double) TAILLE / 4, (double) TAILLE /2, (double) TAILLE /2);
         }
 
         //bouclier
         if(labyrinthe.getLabyrinthe().pj.possedeBouclier()){
-            Image img = new Image("image/shield.png");
-            gc.setFill(new ImagePattern(img));
+            gc.setFill(loader.getImage("shield.png"));
             gc.fillRect((18 * TAILLE) + ((double) TAILLE / 4), (double) TAILLE / 4, (double) TAILLE /2, (double) TAILLE /2);
         }
         if(!labyrinthe.getLabyrinthe().pj.possedeBouclier()) {
             if (labyrinthe.getLabyrinthe().boucliers[0] != null) {
                 double bouclierx = labyrinthe.getLabyrinthe().boucliers[0].getX();
                 double boucliery = labyrinthe.getLabyrinthe().boucliers[0].getY();
-                Image img = new Image("image/shield.png");
-                gc.setFill(new ImagePattern(img));
+                gc.setFill(loader.getImage("shield.png"));
                 gc.fillRect(bouclierx * TAILLE, boucliery * TAILLE, TAILLE, TAILLE);
             }
         }
@@ -152,20 +146,16 @@ public class LabyDessin implements DessinJeu {
         switch (labyrinthe.getLabyrinthe().pj.getIsAttaque()) {
             case "gauche" -> {switch (nbframe) {
                 case 0 -> {
-                    Image img = new Image("image/knight_m_idle_anim_f0_left.png");
-                    gc.setFill(new ImagePattern(img));
+                    gc.setFill(loader.getImage("knight_m_idle_anim_f0_left.png"));
                 }
                 case 1 -> {
-                    Image img = new Image("image/knight_m_idle_anim_f1_left.png");
-                    gc.setFill(new ImagePattern(img));
+                    gc.setFill(loader.getImage("knight_m_idle_anim_f1_left.png"));
                 }
                 case 2 -> {
-                    Image img = new Image("image/knight_m_idle_anim_f2_left.png");
-                    gc.setFill(new ImagePattern(img));
+                    gc.setFill(loader.getImage("knight_m_idle_anim_f2_left.png"));
                 }
                 case 3 -> {
-                    Image img = new Image("image/knight_m_idle_anim_f3_left.png");
-                    gc.setFill(new ImagePattern(img));
+                    gc.setFill(loader.getImage("knight_m_idle_anim_f3_left.png"));
                 }
                 default -> {
                     gc.setFill(labyrinthe.getLabyrinthe().pj.getCouleur());
@@ -174,20 +164,16 @@ public class LabyDessin implements DessinJeu {
             default -> {
                 switch (nbframe) {
                     case 0 -> {
-                        Image img = new Image("image/knight_m_idle_anim_f0.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("knight_m_idle_anim_f0.png"));
                     }
                     case 1 -> {
-                        Image img = new Image("image/knight_m_idle_anim_f1.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("knight_m_idle_anim_f1.png"));
                     }
                     case 2 -> {
-                        Image img = new Image("image/knight_m_idle_anim_f2.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("knight_m_idle_anim_f2.png"));
                     }
                     case 3 -> {
-                        Image img = new Image("image/knight_m_idle_anim_f3.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("knight_m_idle_anim_f3.png"));
                     }
                     default -> {
                         gc.setFill(labyrinthe.getLabyrinthe().pj.getCouleur());
@@ -197,48 +183,41 @@ public class LabyDessin implements DessinJeu {
         }
         gc.fillRect(persox * TAILLE, persoy * TAILLE, TAILLE, TAILLE);
         if(labyrinthe.getLabyrinthe().pj.possedeArme()) {
-            Image img = new Image("image/weapon_red_gem_sword.png");
-            gc.setFill(new ImagePattern(img));
+            gc.setFill(loader.getImage("weapon_red_gem_sword.png"));
             gc.fillRect((19 * TAILLE) + ((double) TAILLE / 4), (double) TAILLE / 4, (double) TAILLE / 2, (double) TAILLE);
         }else{
-            Image img = new Image("image/weapon_rusty_sword.png");
-            gc.setFill(new ImagePattern(img));
+            gc.setFill(loader.getImage("weapon_rusty_sword.png"));
             gc.fillRect((19 * TAILLE) + ((double) TAILLE / 4), (double) TAILLE / 4, (double) TAILLE / 2, (double) TAILLE);
         }
         if(!Objects.equals(labyrinthe.getLabyrinthe().pj.getIsAttaque(), "")){
             if(labyrinthe.getLabyrinthe().pj.possedeArme()) {
                 switch (labyrinthe.getLabyrinthe().pj.getIsAttaque()) {
                     case "droite" -> {
-                        Image img = new Image("image/weapon_red_gem_sword_right.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("weapon_red_gem_sword_right.png"));
                         gc.fillRect(persox * TAILLE + TAILLE, persoy * TAILLE + ((double) TAILLE / 4), TAILLE, (double) TAILLE / 2);
                         labyrinthe.getLabyrinthe().pj.setAttaque("");
                     }
 
                     case "gauche" -> {
-                        Image img = new Image("image/weapon_red_gem_sword_left.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("weapon_red_gem_sword_left.png"));
                         gc.fillRect(persox * TAILLE - TAILLE, persoy * TAILLE + ((double) TAILLE / 4), TAILLE, (double) TAILLE / 2);
                         labyrinthe.getLabyrinthe().pj.setAttaque("");
                     }
 
                     case "haut" -> {
-                        Image img = new Image("image/weapon_red_gem_sword.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("weapon_red_gem_sword.png"));
                         gc.fillRect(persox * TAILLE + ((double) TAILLE / 4), persoy * TAILLE - TAILLE, (double) TAILLE / 2, TAILLE);
                         labyrinthe.getLabyrinthe().pj.setAttaque("");
                     }
 
                     case "bas" -> {
-                        Image img = new Image("image/weapon_red_gem_sword_down.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("weapon_red_gem_sword_down.png"));
                         gc.fillRect(persox * TAILLE + ((double) TAILLE / 4), persoy * TAILLE + TAILLE, (double) TAILLE / 2, TAILLE);
                         labyrinthe.getLabyrinthe().pj.setAttaque("");
                     }
 
                     default -> {
-                        Image img = new Image("image/weapon_red_gem_sword.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("weapon_red_gem_sword.png"));
                         gc.fillRect(persox * TAILLE, persoy * TAILLE, (double) TAILLE / 2, TAILLE);
                         labyrinthe.getLabyrinthe().pj.setAttaque("");
                     }
@@ -247,36 +226,31 @@ public class LabyDessin implements DessinJeu {
             }else {
                 switch (labyrinthe.getLabyrinthe().pj.getIsAttaque()) {
                     case "droite" -> {
-                        Image img = new Image("image/weapon_rusty_sword_right.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("weapon_rusty_sword_right.png"));
                         gc.fillRect(persox * TAILLE + TAILLE, persoy * TAILLE + ((double) TAILLE / 4), TAILLE, (double) TAILLE / 2);
                         labyrinthe.getLabyrinthe().pj.setAttaque("");
                     }
 
                     case "gauche" -> {
-                        Image img = new Image("image/weapon_rusty_sword_left.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("weapon_rusty_sword_left.png"));
                         gc.fillRect(persox * TAILLE - TAILLE, persoy * TAILLE + ((double) TAILLE / 4), TAILLE, (double) TAILLE / 2);
                         labyrinthe.getLabyrinthe().pj.setAttaque("");
                     }
 
                     case "haut" -> {
-                        Image img = new Image("image/weapon_rusty_sword.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("weapon_rusty_sword.png"));
                         gc.fillRect(persox * TAILLE + ((double) TAILLE / 4), persoy * TAILLE - TAILLE, (double) TAILLE / 2, TAILLE);
                         labyrinthe.getLabyrinthe().pj.setAttaque("");
                     }
 
                     case "bas" -> {
-                        Image img = new Image("image/weapon_rusty_sword_down.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("weapon_rusty_sword_down.png"));
                         gc.fillRect(persox * TAILLE + ((double) TAILLE / 4), persoy * TAILLE + TAILLE, (double) TAILLE / 2, TAILLE);
                         labyrinthe.getLabyrinthe().pj.setAttaque("");
                     }
 
                     default -> {
-                        Image img = new Image("image/weapon_rusty_sword.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("weapon_rusty_sword.png"));
                         gc.fillRect(persox * TAILLE, persoy * TAILLE, (double) TAILLE / 2, TAILLE);
                         labyrinthe.getLabyrinthe().pj.setAttaque("");
                     }
@@ -292,20 +266,16 @@ public class LabyDessin implements DessinJeu {
                 double monstrey = m.getY();
                 switch (nbframe) {
                     case 0 -> {
-                        Image img = new Image("image/big_demon_idle_anim_f0.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("big_demon_idle_anim_f0.png"));
                     }
                     case 1 -> {
-                        Image img = new Image("image/big_demon_idle_anim_f1.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("big_demon_idle_anim_f1.png"));
                     }
                     case 2 -> {
-                        Image img = new Image("image/big_demon_idle_anim_f2.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("big_demon_idle_anim_f2.png"));
                     }
                     case 3 -> {
-                        Image img = new Image("image/big_demon_idle_anim_f3.png");
-                        gc.setFill(new ImagePattern(img));
+                        gc.setFill(loader.getImage("big_demon_idle_anim_f3.png"));
                     }
                 }
 
