@@ -77,8 +77,12 @@ public class LabyJeu implements Jeu {
                     labyrinthes[current].pj.setArme(labyrinthes[current].armes[i]);
             }
             if(labyrinthes[current].boucliers[i] != null) {
-                if (Arrays.equals(labyrinthes[current].boucliers[i].getPos(), labyrinthes[current].pj.getPos()))
+                if (Arrays.equals(labyrinthes[current].boucliers[i].getPos(), labyrinthes[current].pj.getPos())) {
                     labyrinthes[current].pj.setBouclier(labyrinthes[current].boucliers[i]);
+                    //envois de l'amulette dans les abisses
+                    labyrinthes[current].boucliers[i].x = 999;
+                    labyrinthes[current].boucliers[i].y = 999;
+                }
             }
         }
     }

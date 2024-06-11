@@ -100,7 +100,7 @@ public class LabyDessin implements DessinJeu {
                 gc.fillRect(sortiex * TAILLE, sortiey * TAILLE, TAILLE, TAILLE);
                 Image img = new Image("image/doors_leaf_closed.png");
                 gc.setFill(new ImagePattern(img));
-                gc.fillRect(sortiex * TAILLE, sortiey * TAILLE, TAILLE, TAILLE);
+                gc.fillRect(sortiex * TAILLE, sortiey * TAILLE+TAILLE, TAILLE, TAILLE);
 
             }else {
                 Image img2 = new Image("image/floor_ladder.png");
@@ -108,7 +108,7 @@ public class LabyDessin implements DessinJeu {
                 gc.fillRect(sortiex * TAILLE, sortiey * TAILLE, TAILLE, TAILLE);
                 Image img = new Image("image/doors_leaf_open.png");
                 gc.setFill(new ImagePattern(img));
-                gc.fillRect(sortiex * TAILLE, sortiey * TAILLE, TAILLE, TAILLE);
+                gc.fillRect(sortiex * TAILLE, sortiey * TAILLE+TAILLE, TAILLE, TAILLE);
             }
         }
 
@@ -123,7 +123,19 @@ public class LabyDessin implements DessinJeu {
             }
         }
 
+        //vie
+        for(int i = 0; i<labyrinthe.getLabyrinthe().pj.getVie();i++){
+            Image img = new Image("image/ui_heart_full.png");
+            gc.setFill(new ImagePattern(img));
+            gc.fillRect((i * TAILLE) + ((double) TAILLE / 4), (double) TAILLE / 4, (double) TAILLE /2, (double) TAILLE /2);
+        }
+
         //bouclier
+        if(labyrinthe.getLabyrinthe().pj.possedeBouclier()){
+            Image img = new Image("image/shield.png");
+            gc.setFill(new ImagePattern(img));
+            gc.fillRect((18 * TAILLE) + ((double) TAILLE / 4), (double) TAILLE / 4, (double) TAILLE /2, (double) TAILLE /2);
+        }
         if(!labyrinthe.getLabyrinthe().pj.possedeBouclier()) {
             if (labyrinthe.getLabyrinthe().boucliers[0] != null) {
                 double bouclierx = labyrinthe.getLabyrinthe().boucliers[0].getX();
@@ -137,28 +149,62 @@ public class LabyDessin implements DessinJeu {
         // perso
         double persox = labyrinthe.getLabyrinthe().pj.getX();
         double persoy = labyrinthe.getLabyrinthe().pj.getY();
-        switch (nbframe) {
-            case 0 -> {
-                Image img = new Image("image/knight_m_idle_anim_f0.png");
-                gc.setFill(new ImagePattern(img));
-            }
-            case 1 -> {
-                Image img = new Image("image/knight_m_idle_anim_f1.png");
-                gc.setFill(new ImagePattern(img));
-            }
-            case 2 -> {
-                Image img = new Image("image/knight_m_idle_anim_f2.png");
-                gc.setFill(new ImagePattern(img));
-            }
-            case 3 -> {
-                Image img = new Image("image/knight_m_idle_anim_f3.png");
-                gc.setFill(new ImagePattern(img));
-            }
+        switch (labyrinthe.getLabyrinthe().pj.getIsAttaque()) {
+            case "gauche" -> {switch (nbframe) {
+                case 0 -> {
+                    Image img = new Image("image/knight_m_idle_anim_f0_left.png");
+                    gc.setFill(new ImagePattern(img));
+                }
+                case 1 -> {
+                    Image img = new Image("image/knight_m_idle_anim_f1_left.png");
+                    gc.setFill(new ImagePattern(img));
+                }
+                case 2 -> {
+                    Image img = new Image("image/knight_m_idle_anim_f2_left.png");
+                    gc.setFill(new ImagePattern(img));
+                }
+                case 3 -> {
+                    Image img = new Image("image/knight_m_idle_anim_f3_left.png");
+                    gc.setFill(new ImagePattern(img));
+                }
+                default -> {
+                    gc.setFill(labyrinthe.getLabyrinthe().pj.getCouleur());
+                }
+            }}
             default -> {
-                gc.setFill(labyrinthe.getLabyrinthe().pj.getCouleur());
+                switch (nbframe) {
+                    case 0 -> {
+                        Image img = new Image("image/knight_m_idle_anim_f0.png");
+                        gc.setFill(new ImagePattern(img));
+                    }
+                    case 1 -> {
+                        Image img = new Image("image/knight_m_idle_anim_f1.png");
+                        gc.setFill(new ImagePattern(img));
+                    }
+                    case 2 -> {
+                        Image img = new Image("image/knight_m_idle_anim_f2.png");
+                        gc.setFill(new ImagePattern(img));
+                    }
+                    case 3 -> {
+                        Image img = new Image("image/knight_m_idle_anim_f3.png");
+                        gc.setFill(new ImagePattern(img));
+                    }
+                    default -> {
+                        gc.setFill(labyrinthe.getLabyrinthe().pj.getCouleur());
+                    }
+                }
             }
         }
         gc.fillRect(persox * TAILLE, persoy * TAILLE, TAILLE, TAILLE);
+        if(labyrinthe.getLabyrinthe().pj.possedeArme()) {
+            Image img = new Image("image/weapon_red_gem_sword.png");
+            gc.setFill(new ImagePattern(img));
+            gc.fillRect((19 * TAILLE) + ((double) TAILLE / 4), (double) TAILLE / 4, (double) TAILLE / 2, (double) TAILLE);
+        }else{
+            Image img = new Image("image/weapon_rusty_sword.png");
+            gc.setFill(new ImagePattern(img));
+            gc.fillRect((19 * TAILLE) + ((double) TAILLE / 4), (double) TAILLE / 4, (double) TAILLE / 2, (double) TAILLE);
+        }
         if(!Objects.equals(labyrinthe.getLabyrinthe().pj.getIsAttaque(), "")){
             if(labyrinthe.getLabyrinthe().pj.possedeArme()) {
                 switch (labyrinthe.getLabyrinthe().pj.getIsAttaque()) {

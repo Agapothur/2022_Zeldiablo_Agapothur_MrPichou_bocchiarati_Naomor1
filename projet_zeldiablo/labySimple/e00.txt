@@ -3,9 +3,9 @@
 XXXXXXXXXXXXXXXXXXXX
 XA.......X.........X
 X..X..M..X.....X...X
-X..X...........X...X
-X......XX.XX.......X
-X......X.S.X.......X
+X..X....XXX....X...X
+X......XXSXX.......X
+X.......X.X........X
 X..XX...BPW...XXX..X
 X......X...X.......X
 X......XX.XX...M...X

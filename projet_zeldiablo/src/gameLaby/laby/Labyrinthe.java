@@ -155,7 +155,7 @@ Labyrinthe {
                         break;
                     case SORTIE:
                         // pas de mur
-                        this.murs[colonne][numeroLigne] = false;
+                        this.murs[colonne][numeroLigne] = true;
                         // ajoute amulette
                         this.sortie = new Sortie(colonne, numeroLigne);
                         this.sortiepresente = true;
@@ -237,6 +237,7 @@ Labyrinthe {
         if(this.amulettepresente) {
             if (this.amulette.x == suivante[0] && this.amulette.y == suivante[1]) {
                 this.pj.setAmulette(true);
+                this.murs[this.sortie.x][this.sortie.y] = false;
                 //envois de l'amulette dans les abisses
                 this.amulette.x = 999;
                 this.amulette.y = 999;
