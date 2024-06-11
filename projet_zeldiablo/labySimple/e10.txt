@@ -1,16 +1,21 @@
 14
 20
 XXXXXXXXXXXXXXXXXXXX
+<<<<<<< HEAD
 X............X.....X
 X.X..........X...A.2
+=======
+X.....M......X.....X
+X.X..........X...A.X
+>>>>>>> 3b77e0e12b2e83ae07fe0233ee4662e70a9589e0
 XMX.....XXXXXX.....X
-X.X..........XXXXXXX
+X.X..M.......XXXXXXX
 X.XXX........X.....X
 X...XXX......X..M..X
 X.....XXX....X.....X
 X.......XXX..X.....X
 1P........XXXX.....X
-X............X.....X
+X.....M......X.....X
 X............X.....X
 X.................MX
 XXXXXXXXXXXXXXXXXXXX

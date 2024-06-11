@@ -168,7 +168,10 @@ public class MoteurJeu extends Application {
             primaryStage.setScene(scene);
 
             primaryStage.centerOnScreen();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3b77e0e12b2e83ae07fe0233ee4662e70a9589e0
             primaryStage.show();
 
 
