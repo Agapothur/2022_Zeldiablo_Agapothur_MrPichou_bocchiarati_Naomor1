@@ -21,19 +21,6 @@ Critères de validation
 • Il est possible de charger une image (de type BufferedImage en mémoire grâce à
 la classe ImageIO et la méthode statique read).
 
-7.1 Inventaire
-Des objets (sans utilité pour le moment) sont disposés dans des cases vides du labyrinthe, lorsque le héros appuie sur la touche d'utilisation ("E" par défaut), il récupère
-les objets de la case où il se trouve et les ajoute dans son inventaire.
-Critères de validation
-• L'inventaire est de taille innie.
-• Lorsque le joueur cherche à prendre un objet alors qu'il n'y a rien sur la case où
-il se trouve, rien ne se passe.
-• Lorsqu'un joueur prend un objet, l'objet disparait du labyrinthe (et n'est plus
-aché) mais apparait dans son inventaire.
-• A chaque évolution du jeu, le jeu ache dans la console l'inventaire du héros.
-• Les objets sont achés dans le labyrinthe tant qu'ils sont présents (sous la forme
-d'un cercle noir)
-
 7.2 Armes
 Les armes sont des objets que le héros peut prendre. Une arme augmente d'un
 certain nombre les dégâts du héros.

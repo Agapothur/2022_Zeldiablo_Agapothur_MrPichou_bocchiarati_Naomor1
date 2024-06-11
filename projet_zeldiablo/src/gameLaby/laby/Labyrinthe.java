@@ -52,6 +52,7 @@ Labyrinthe {
     public boolean[][] murs;
     private Random random;
     private boolean amulettepresente, sortiepresente;
+    int nbMonstre;
 
 
     /**
@@ -115,6 +116,7 @@ Labyrinthe {
         this.armes = new ArrayList<>();
         this.boucliers = new ArrayList<>();
         this.monstres = new Monstre[0];
+        this.nbMonstre = 0;
 
         // lecture des cases
         String ligne = bfRead.readLine();
@@ -146,6 +148,8 @@ Labyrinthe {
                         this.murs[colonne][numeroLigne] = false;
                         // ajoute Monstre
                         ajouterMonstre(new Monstre(colonne, numeroLigne));
+                        if(nom.equals("projet_zeldiablo/labySimple/e10.txt"))
+                            nbMonstre += 1;
                         break;
                     case AMULETTE:
                         // pas de mur

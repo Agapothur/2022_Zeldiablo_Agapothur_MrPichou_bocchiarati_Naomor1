@@ -139,7 +139,7 @@ public class LabyJeu implements Jeu {
 
 
     public void debloqueAmulette(){
-        if(kills == 6){
+        if(kills == laby.nbMonstre){
             labyrinthes[10].murs[18][4] = false;
             labyrinthes[10].murs[17][4] = false;
             labyrinthes[10].murs[16][4] = false;
