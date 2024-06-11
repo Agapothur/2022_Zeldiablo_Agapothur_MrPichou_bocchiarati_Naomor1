@@ -166,12 +166,9 @@ public class MoteurJeu extends Application {
             // creation de la scene
             final Scene scene = new Scene(root, WIDTH, HEIGHT);
             primaryStage.setScene(scene);
-<<<<<<< HEAD
-            primaryStage.setX(150);
-            primaryStage.setY(55);
-=======
+
             primaryStage.centerOnScreen();
->>>>>>> 41838f9e6f8de0c895ac56b825f47f0078b728cc
+
             primaryStage.show();
 
 
