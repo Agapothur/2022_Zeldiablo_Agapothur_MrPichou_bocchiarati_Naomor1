@@ -21,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -121,17 +122,19 @@ public class MoteurJeu extends Application {
         Button but2 = new Button("Lancer");
 
         Text ta = new Text();
-        ta.setFill(Color.WHITE);
+        ta.setFill(Color.ANTIQUEWHITE);
         ta.setStrokeWidth(.1);
         ta.setStroke(Color.BLACK);
         ta.setText("Vous êtes un chevalier en quête de pouvoir.\n Votre but ? Récupérer le crâne du roi maudit,\n mais attention à ses sbires qui rôdent dans le donjon…");
         ta.setTextAlignment(TextAlignment.CENTER);
+        Rectangle r = new Rectangle(300,50);
+        r.setOpacity(.5);
+        StackPane sp = new StackPane();
+        sp.getChildren().addAll(r,ta);
 
-
-
-        bouton.getChildren().addAll(but1, but2);
+        bouton.getChildren().addAll(but2, but1);
         bouton.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(ta,bouton);
+        root.getChildren().addAll(sp,bouton);
         root.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(root, 500, 500);
@@ -163,7 +166,12 @@ public class MoteurJeu extends Application {
             // creation de la scene
             final Scene scene = new Scene(root, WIDTH, HEIGHT);
             primaryStage.setScene(scene);
+<<<<<<< HEAD
+            primaryStage.setX(150);
+            primaryStage.setY(55);
+=======
             primaryStage.centerOnScreen();
+>>>>>>> 41838f9e6f8de0c895ac56b825f47f0078b728cc
             primaryStage.show();
 
 
