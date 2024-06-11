@@ -49,7 +49,7 @@ public class LabyDessin implements DessinJeu {
             ImagePattern[] ip = new ImagePattern[7];
 
             for(int i = 0; i<7;i++){
-                ip[i] = new ImagePattern(new Image("image/floor_"+(i+1)+".png"));
+                ip[i] = loader.getImage("floor_"+(i+1)+".png");
             }
 
             for (int i = 0; i < 255; i++) {
