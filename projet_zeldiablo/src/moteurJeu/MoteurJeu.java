@@ -2,6 +2,7 @@ package moteurJeu;
 
 //https://github.com/zarandok/megabounce/blob/master/MainCanvas.java
 
+import gameLaby.laby.SpriteLoader;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.beans.property.LongProperty;
@@ -34,6 +35,7 @@ public class MoteurJeu extends Application {
      */
     private static double WIDTH = 800;
     private static double HEIGHT = 600;
+    private static SpriteLoader loader;
 
     /**
      * statistiques sur les frames
@@ -45,6 +47,7 @@ public class MoteurJeu extends Application {
      */
     private static Jeu jeu = null;
     private static DessinJeu dessin = null;
+
 
     /**
      * touches appuyee entre deux frame
@@ -153,6 +156,11 @@ public class MoteurJeu extends Application {
         // stocke la derniere mise e jour
         final LongProperty lastUpdateTime = new SimpleLongProperty(0);
 
+        // création du spriteloader
+        final SpriteLoader loader = new SpriteLoader("image");
+
+
+
         // timer pour boucle de jeu
         final AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -178,7 +186,7 @@ public class MoteurJeu extends Application {
                     }
 
                     // dessine le jeu
-                    dessin.dessinerJeu(jeu, canvas);
+                    dessin.dessinerJeu(jeu, canvas, loader);
 
                     // ajoute la duree dans les statistiques
                     frameStats.addFrame(elapsedTime);
@@ -193,4 +201,6 @@ public class MoteurJeu extends Application {
         // lance l'animation
         timer.start();
     }
+
+
 }
