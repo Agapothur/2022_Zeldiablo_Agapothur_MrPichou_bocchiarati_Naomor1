@@ -72,16 +72,17 @@ public class LabyJeu implements Jeu {
             }
         }
         setLabyrinthe();
-        debloqueAmulette();
+
 
         for(Monstre m : getLabyrinthe().monstres){
             if (m.getPv() <= 0) {
                 laby.nePlusAfficherMonstre(m);
                 if(current == 10) kills += 1;
+                debloqueAmulette();
             }
-            else kills = 0;
-
         }
+        if(kills < 6) kills = 0;
+
         for(int i = 0; i<laby.armes.size(); i++) {
             if(laby.armes.get(i) != null) {
                 if (Arrays.equals(laby.armes.get(i).getPos(), laby.pj.getPos()))
@@ -100,10 +101,6 @@ public class LabyJeu implements Jeu {
         }
         if(remove != -1){
             laby.boucliers.remove(remove);
-        }
-
-        if(current == 9){
-            System.out.println(laby.boucliers.size());
         }
         Random rand = new Random();
         for(Monstre m : laby.monstres) {
@@ -142,7 +139,7 @@ public class LabyJeu implements Jeu {
 
 
     public void debloqueAmulette(){
-        if(kills == 7){
+        if(kills == 6){
             labyrinthes[10].murs[18][4] = false;
             labyrinthes[10].murs[17][4] = false;
             labyrinthes[10].murs[16][4] = false;
