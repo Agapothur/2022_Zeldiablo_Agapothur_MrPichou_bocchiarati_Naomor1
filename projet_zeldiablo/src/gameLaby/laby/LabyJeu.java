@@ -79,6 +79,8 @@ public class LabyJeu implements Jeu {
                 laby.nePlusAfficherMonstre(m);
                 if(current == 10) kills += 1;
             }
+            else kills = 0;
+
         }
         for(int i = 0; i<laby.armes.size(); i++) {
             if(laby.armes.get(i) != null) {
