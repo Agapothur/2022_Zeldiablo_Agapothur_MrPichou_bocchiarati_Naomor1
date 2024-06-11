@@ -85,7 +85,6 @@ public class LabyJeu implements Jeu {
                 }
             }
         }
-        System.out.println(this.labyrinthes[current].pj.possedeBouclier());
     }
 
     @Override

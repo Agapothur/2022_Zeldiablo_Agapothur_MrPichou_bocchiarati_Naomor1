@@ -254,7 +254,19 @@ Labyrinthe {
 //        String actions = ACTIONS[random.nextInt(ACTIONS.length)];
 //        deplacerMonstreAleatoire(actions);
         for(Monstre m : monstres) {
-            deplacerMonstreAttire(m);
+            Random rand = new Random();
+            int nb = rand.nextInt(3);
+            System.out.println(nb);
+            switch (nb){
+
+                case 1 ->{
+                    deplacerMonstreAttire(m);
+                }
+                case 2 ->{
+                    deplacerMonstreAleatoire(m,ACTIONS[rand.nextInt(4)]);
+                }
+            }
+
         }
     }
     /**
