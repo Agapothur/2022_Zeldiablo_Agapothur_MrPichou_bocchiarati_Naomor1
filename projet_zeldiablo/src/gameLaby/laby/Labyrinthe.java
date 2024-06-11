@@ -32,7 +32,6 @@ Labyrinthe {
     // Ajoutez les constantes pour les directions possibles
     public static final String[] ACTIONS = {HAUT, BAS, GAUCHE, DROITE};
 
-
     /**
      * attributs du personnage et du monstre
      */
@@ -44,6 +43,7 @@ Labyrinthe {
     public Arme[] armes;
     public Bouclier[] boucliers;
 
+    public String p;
     /**
      * les murs du labyrinthe
      */
@@ -303,10 +303,6 @@ Labyrinthe {
         }
     }
 
-
-
-
-
     public void deplacerMonstreAttire(Monstre m) {
 
         if(m.getPv() > 0){
@@ -418,7 +414,7 @@ Labyrinthe {
             System.out.print("You Win");
         }
         else{
-            System.out.print("YouLose");
+            System.out.print("You Lose");
         }
         System.exit(0);
     }
